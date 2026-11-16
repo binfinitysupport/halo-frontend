@@ -10,11 +10,12 @@
   No phone frame. Screens keep the prototype's 402px design width: on phones (≤600px) the screen is
   CSS-zoomed to the device width, on wider viewports it is a centred 402px column.
 - **Backend** – separate repo `halo-backend` (Express + Neon). Locally on port 5050; in production on Render.
-  `/api` is proxied by `proxy.conf.json` (dev) and `vercel.json` rewrites (production).
+  API base URL: `src/environments/environment.ts` (production → Render URL) and
+  `environment.development.ts` (`/api`, proxied by `proxy.conf.json`). Render's `CLIENT_ORIGIN` must include the Vercel URL.
 
 ## Commands
 - `npm install`, `npm run dev` (port 4200), `npm run build` (→ `dist/halo-admin/browser`).
-- Deployed on Vercel via `vercel.json`. If the Render URL changes, update the `/api` rewrite there.
+- Deployed on Vercel via `vercel.json` (no env vars). If the Render URL changes, update `src/environments/environment.ts`.
 
 ## Layout
 - `src/app/app.routes.ts` – `''` → user app, `'admin'` → admin.

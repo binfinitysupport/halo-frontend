@@ -2,7 +2,9 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Observable } from 'rxjs';
 
-const BASE = '/api';
+import { environment } from '../../environments/environment';
+
+const BASE = environment.apiUrl;
 
 // Thin wrapper around HttpClient. All paths are relative to /api.
 @Injectable({ providedIn: 'root' })

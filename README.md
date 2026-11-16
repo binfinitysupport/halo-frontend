@@ -15,11 +15,14 @@ Start the backend (`halo-backend`) on port 5050 first, or the admin shows "Reque
 
 ## Deploy on Vercel
 
-`vercel.json` configures everything:
-- build `npm run build`, output `dist/halo-admin/browser`
-- `/api/*` is forwarded to the Render backend (`https://halo-backend.onrender.com`). If your Render
-  URL is different, change the `destination` in `vercel.json`.
-- every other path serves `index.html`, so `/admin` works on refresh.
+`vercel.json` configures the build (`npm run build`, output `dist/halo-admin/browser`) and serves
+`index.html` for every path, so `/admin` works on refresh. No Vercel environment variables are needed.
+
+The API address comes from Angular environment files:
+- `src/environments/environment.ts` – production (Vercel): the Render URL.
+- `src/environments/environment.development.ts` – `npm run dev`: `/api`, proxied to `localhost:5050`.
+
+The app calls Render directly, so the backend's `CLIENT_ORIGIN` on Render must list the Vercel URL (CORS).
 
 ## Regenerating the user app from the prototype
 
