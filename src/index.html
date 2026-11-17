@@ -3,6 +3,18 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <script>
+      // iOS Safari zooms in when a field under 16px is focused. maximum-scale=1 stops that on iPhone/iPad,
+      // where pinch-zoom still works; Android doesn't auto-zoom and would lose pinch-zoom, so it is left alone.
+      (function () {
+        var ua = navigator.userAgent;
+        var iOS = /iPad|iPhone|iPod/.test(ua) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+        if (iOS) {
+          document.querySelector('meta[name=viewport]')
+            .setAttribute('content', 'width=device-width, initial-scale=1, maximum-scale=1');
+        }
+      })();
+    </script>
     <title>Halo Admin</title>
     <base href="/" />
   </head>
