@@ -98,3 +98,6 @@
 @media (min-width: 601px) { .u-screen { box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 30px 80px rgba(0,0,0,.6); } }
 /* The admin's global reset uses border-box; the prototype screens are laid out with the browser default. */
 .u-screen *, .u-screen *::before, .u-screen *::after { box-sizing: content-box; }
+/* Server sheet: lay out as a column so the server list shrinks and scrolls and "Order now" stays visible.
+   (The prototype marks the list flex:1 and the rest flex:none, but its sheet is display:block.) */
+.u-screen .u-sheet:has(> .u-srv-list) { display: flex !important; flex-direction: column; overflow: hidden !important; }

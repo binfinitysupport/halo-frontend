@@ -122,7 +122,8 @@ function convertText(t) {
     const p = o[1].trim(), key = p.split('.').pop();
     // Inside SVG an HTML span is not rendered (the prototype loses these labels); use plain text.
     if (svgDepth > 0) return '{{ uShow(' + scoped(p) + ') ? ' + scoped(p) + " : '' }}";
-    if (isElemKey(key)) { usedElemKeys.add(p); return '<span style="display:contents" [innerHTML]="uNode(' + scoped(p) + ')"></span>'; }
+    // uMorph patches the DOM in place, so animations inside these elements keep running across re-renders.
+    if (isElemKey(key)) { usedElemKeys.add(p); return '<span style="display:contents" [uMorph]="' + scoped(p) + '"></span>'; }
     return '@if (uShow(' + scoped(p) + ')) {<span class="sc-interp">{{ ' + scoped(p) + ' }}</span>}';
   }).join('');
 }
@@ -138,6 +139,15 @@ if (svgDepth) throw new Error('unbalanced svg');
 if (scopes.length) throw new Error('unbalanced sc blocks');
 
 html = html.replace(/height:874px;/g, 'min-height:100%;');
+
+// Phones are shorter than the 874px design: hooks so the server sheet can keep its button on screen (see CSS).
+function tagOnce(re, cls) {
+  const n = (html.match(re) || []).length;
+  if (n !== 1) throw new Error('expected one match for ' + re + ', found ' + n);
+  html = html.replace(re, (m) => m.replace('<div ', '<div class="' + cls + '" '));
+}
+tagOnce(/<div style="position:absolute;left:0;right:0;bottom:0;z-index:61;max-height:82%;[^"]*">/, 'u-sheet');
+tagOnce(/<div style="overflow-y:auto;flex:1;min-height:0;max-height:430px;[^"]*">/, 'u-srv-list');
 const tpl = `<div class="u-root" data-ref="rootRef">
   <div class="u-screen" data-ref="screenRef">
     <div style="${innerStyle}">${html}</div>
@@ -165,6 +175,9 @@ ${css}
 @media (min-width: 601px) { .u-screen { box-shadow: 0 0 0 1px rgba(255,255,255,.08), 0 30px 80px rgba(0,0,0,.6); } }
 /* The admin's global reset uses border-box; the prototype screens are laid out with the browser default. */
 .u-screen *, .u-screen *::before, .u-screen *::after { box-sizing: content-box; }
+/* Server sheet: lay out as a column so the server list shrinks and scrolls and "Order now" stays visible.
+   (The prototype marks the list flex:1 and the rest flex:none, but its sheet is display:block.) */
+.u-screen .u-sheet:has(> .u-srv-list) { display: flex !important; flex-direction: column; overflow: hidden !important; }
 `);
 fs.writeFileSync(path.join(src, 'fonts.txt'), fontFiles.join('\n'));
 console.log('elem methods:', [...elemMethods].join(','));

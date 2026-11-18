@@ -20,8 +20,9 @@
 ## Layout
 - `src/app/app.routes.ts` – `''` → user app, `'admin'` → admin.
 - `src/app/user/` – **generated** by `tools/convert.js`; do not hand-edit `user-app.html`, `user-logic.ts`, `user-app.css`.
-  - `user-h.ts` – `h()` replaces React.createElement; returns `Html` values inserted via `uNode()`.
-  - `user-app.component.ts` – Angular wrapper: lifecycle, `vm` getter, `uShow`/`uNode`/`uSync`, phone zoom (`fit()`).
+  - `user-h.ts` – `h()` replaces React.createElement; returns `Html` values.
+  - `user-morph.directive.ts` – `[uMorph]` renders `Html` slots by patching the DOM in place (like React), so CSS animations are not restarted on re-render. Never switch these slots back to `[innerHTML]`.
+  - `user-app.component.ts` – Angular wrapper: lifecycle, `vm` getter, `uShow`/`uSync`, phone zoom (`fit()`).
 - `src/user-data/` – the prototype's global data scripts (countries, languages, flags, partner logos), loaded via `angular.json` `scripts`.
 - `src/assets/fonts/` – Inter 900 (used by the B-Infinity logo text).
 
@@ -35,7 +36,7 @@ node tools/convert.js $T src/app/user
 If the prototype's fonts or data scripts change, also copy the woff2 files listed in `$T/fonts.txt` into
 `src/assets/fonts/` and the two `<script src>` files of the prototype into `src/user-data/`.
 The converter mirrors the dc-runtime: `sc-if/sc-for` → `@if/@for`, `{{ x }}` → `<span class="sc-interp">`,
-element values → `uNode()`, `onChange` on text inputs → `(input)`, and it resets `box-sizing` to `content-box`
+element values → `[uMorph]`, server sheet → flex column on short screens, `onChange` on text inputs → `(input)`, and it resets `box-sizing` to `content-box`
 inside the user app (the admin's global reset uses border-box).
 
 ## Status

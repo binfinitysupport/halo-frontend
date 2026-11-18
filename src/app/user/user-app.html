@@ -146,11 +146,11 @@
           <div (click)="b.go($event)" style="position:relative;flex:none;width:362px;height:160px;box-sizing:border-box;border-radius:24px;background:{{ b.art }};border:1px solid rgba(255,255,255,.14);box-shadow:inset 0 1px 0 rgba(255,255,255,.25);overflow:hidden;cursor:pointer">
             <div style="position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.045) 0 2px,rgba(255,255,255,0) 2px 11px);pointer-events:none"></div>
             <div style="position:absolute;left:-30%;top:0;width:45%;height:100%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.12),rgba(255,255,255,0));transform:skewX(-18deg);pointer-events:none"></div>
-            <div style="position:absolute;right:8px;top:50%;width:124px;height:124px;margin-top:-62px;display:flex;align-items:center;justify-content:center;pointer-events:none"><span style="display:contents" [innerHTML]="uNode(b.obj)"></span></div>
+            <div style="position:absolute;right:8px;top:50%;width:124px;height:124px;margin-top:-62px;display:flex;align-items:center;justify-content:center;pointer-events:none"><span style="display:contents" [uMorph]="b.obj"></span></div>
             <div style="position:relative;height:100%;width:206px;padding:0 0 0 20px;box-sizing:border-box;display:flex;flex-direction:column;justify-content:center;gap:8px">
               <div style="align-self:flex-start;height:22px;padding:0 9px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);display:flex;align-items:center;font-size:10px;font-weight:800;letter-spacing:.1em">@if (uShow(b.tag)) {<span class="sc-interp">{{ b.tag }}</span>}</div>
-              <div style="font-size:18px;font-weight:800;line-height:1.22;letter-spacing:-.3px;text-wrap:balance"><span style="display:contents" [innerHTML]="uNode(b.title)"></span></div>
-              <div style="font-size:12px;font-weight:600;line-height:1.4;color:rgba(255,255,255,.75)"><span style="display:contents" [innerHTML]="uNode(b.sub)"></span></div>
+              <div style="font-size:18px;font-weight:800;line-height:1.22;letter-spacing:-.3px;text-wrap:balance"><span style="display:contents" [uMorph]="b.title"></span></div>
+              <div style="font-size:12px;font-weight:600;line-height:1.4;color:rgba(255,255,255,.75)"><span style="display:contents" [uMorph]="b.sub"></span></div>
             </div>
           </div>
         }
@@ -162,21 +162,21 @@
 
     <div style="margin-top:14px;height:42px;border-radius:14px;background:#111214;border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;gap:10px;padding:0 0 0 12px;overflow:hidden">
       
-      <div style="flex:1;min-width:0;overflow:hidden;height:100%;display:flex;align-items:center"><span style="display:contents" [innerHTML]="uNode(vm.marquee)"></span></div>
+      <div style="flex:1;min-width:0;overflow:hidden;height:100%;display:flex;align-items:center"><span style="display:contents" [uMorph]="vm.marquee"></span></div>
     </div>
 
     <div style="display:grid;grid-template-columns:1fr 1fr;grid-template-rows:repeat(3,146px);gap:10px;margin-top:22px">
       <div (click)="vm.openDeposit($event)" style="grid-row:span 3;position:relative;border-radius:24px;background:#111214;border:1px solid rgba(255,255,255,.09);padding:16px;overflow:hidden;cursor:pointer" style-hover="border-color:rgba(var(--acc-rgb,107,114,128),.6)">
         <div style="display:flex;align-items:center;gap:8px"><div style="font-size:22px;font-weight:700">Deposit</div></div>
         <div style="font-size:13px;color:rgba(255,255,255,.6);margin-top:6px;line-height:1.4">Add USDT, USDC or ETH via the BEP20 network.<br>Funds are credited 24/7.</div>
-        <div style="position:absolute;left:0;right:0;bottom:56px;height:240px;display:flex;align-items:center;justify-content:center;pointer-events:none"><span style="display:contents" [innerHTML]="uNode(vm.heroObj)"></span></div>
+        <div style="position:absolute;left:0;right:0;bottom:56px;height:240px;display:flex;align-items:center;justify-content:center;pointer-events:none"><span style="display:contents" [uMorph]="vm.heroObj"></span></div>
         <div style="position:absolute;left:16px;bottom:16px;width:28px;height:28px;border-radius:50%;background:#26272B;display:flex;align-items:center;justify-content:center"><svg style="transform:rotate(-30deg)" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></div>
       </div>
       @for (b of vm.bento; track $index) {
         <div (click)="b.go($event)" style="position:relative;border-radius:24px;background:#111214;border:1px solid rgba(255,255,255,.09);padding:14px;overflow:hidden;cursor:pointer" style-hover="border-color:rgba(var(--acc-rgb,107,114,128),.6)">
-          <div style="font-size:19px;font-weight:700"><span style="display:contents" [innerHTML]="uNode(b.title)"></span></div>
-          <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px;line-height:1.35;max-width:96px"><span style="display:contents" [innerHTML]="uNode(b.sub)"></span></div>
-          <div style="position:absolute;right:6px;bottom:14px;width:70px;height:78px;display:flex;align-items:center;justify-content:center;pointer-events:none"><span style="display:contents" [innerHTML]="uNode(b.obj)"></span></div>
+          <div style="font-size:19px;font-weight:700"><span style="display:contents" [uMorph]="b.title"></span></div>
+          <div style="font-size:12px;color:rgba(255,255,255,.6);margin-top:4px;line-height:1.35;max-width:96px"><span style="display:contents" [uMorph]="b.sub"></span></div>
+          <div style="position:absolute;right:6px;bottom:14px;width:70px;height:78px;display:flex;align-items:center;justify-content:center;pointer-events:none"><span style="display:contents" [uMorph]="b.obj"></span></div>
           <div style="position:absolute;left:14px;bottom:14px;width:26px;height:26px;border-radius:50%;background:#26272B;display:flex;align-items:center;justify-content:center"><svg style="transform:rotate(-30deg)" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"></path></svg></div>
         </div>
       }
@@ -213,7 +213,7 @@
     @if (vm.marketEmpty) {<div style="padding:40px 0;text-align:center;font-size:14px;color:rgba(255,255,255,.55)">No coins match.</div>}
 
     <div style="font-size:19px;font-weight:800;margin:28px 0 14px">Trusted partners</div>
-    <div style="margin:0 -20px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)"><span style="display:contents" [innerHTML]="uNode(vm.partnersMarquee)"></span></div>
+    <div style="margin:0 -20px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)"><span style="display:contents" [uMorph]="vm.partnersMarquee"></span></div>
 
     <div style="font-size:19px;font-weight:800;margin:28px 0 14px">How B-Infinity works</div>
     <div (click)="vm.playVideo($event)" style="position:relative;height:204px;border-radius:24px;background:repeating-linear-gradient(135deg,#111214 0 10px,#16171A 10px 20px);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden">
@@ -238,7 +238,7 @@
         <div (click)="p.pick($event)" style="position:relative;flex:none;width:300px;height:188px;border-radius:26px;scroll-snap-align:start;cursor:pointer;background:{{ p.bg }};box-shadow:0 24px 44px -22px rgba(0,0,0,.9), inset 0 1px 0 rgba(255,255,255,.35), inset 0 0 0 1px rgba(255,255,255,.1);transform:{{ p.tr }};opacity:{{ p.op }};transition:transform .35s cubic-bezier(.2,.8,.2,1), opacity .35s">
           <div style="position:absolute;inset:0;border-radius:26px;overflow:hidden;pointer-events:none"><div style="position:absolute;left:-40%;top:0;width:60%;height:100%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.14),rgba(255,255,255,0));transform:skewX(-18deg)"></div></div>
           @if (p.isTrial) {<div style="position:absolute;top:14px;right:14px;z-index:2;height:24px;padding:0 9px;border-radius:999px;background:#16C784;color:#04130C;display:flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:.06em;box-shadow:0 6px 16px rgba(22,199,132,.35)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="stroke:#04130C"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 21V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>FREE TRIAL</div>}
-          <div style="position:absolute;right:0;bottom:0;width:120px;height:200px;display:flex;align-items:flex-end;justify-content:center;pointer-events:none"><span style="display:contents" [innerHTML]="uNode(p.obj)"></span></div>
+          <div style="position:absolute;right:0;bottom:0;width:120px;height:200px;display:flex;align-items:flex-end;justify-content:center;pointer-events:none"><span style="display:contents" [uMorph]="p.obj"></span></div>
           <div style="position:relative;padding:20px;width:190px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between">
             <div style="display:flex;flex-direction:column;gap:8px;align-items:flex-start">
               <div style="font-size:11px;font-weight:800;letter-spacing:.12em;color:rgba(255,255,255,.75);white-space:nowrap">@if (uShow(p.metal)) {<span class="sc-interp">{{ p.metal }}</span>}</div>
@@ -268,7 +268,7 @@
       </div>
       @if (vm.planIsTrial) {
         <div style="position:relative;margin-top:22px;border-radius:24px;overflow:hidden;background:radial-gradient(80% 90% at 50% 0%, rgba(10,99,241,.35) 0%, rgba(10,99,241,0) 70%), #111214;border:1px solid rgba(76,141,255,.3)">
-          <div style="position:relative;height:190px"><span style="display:contents" [innerHTML]="uNode(vm.giftObj)"></span></div>
+          <div style="position:relative;height:190px"><span style="display:contents" [uMorph]="vm.giftObj"></span></div>
           <div style="padding:0 20px 20px;display:flex;flex-direction:column;align-items:center;text-align:center;gap:8px">
             <div style="height:26px;padding:0 10px;border-radius:999px;background:rgba(22,199,132,.15);color:#16C784;display:flex;align-items:center;gap:5px;font-size:12px;font-weight:800"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" style="stroke:#16C784"><path d="M5 12l5 5 9-10"></path></svg>No upgrade conditions</div>
             <div style="font-size:20px;font-weight:800;letter-spacing:-.4px">Upgrade conditions: None</div>
@@ -343,7 +343,7 @@
           <div style="position:relative;height:144px;background:{{ c.bg }};box-shadow:inset 0 1px 0 rgba(255,255,255,.3)">
             <div style="position:absolute;left:-30%;top:0;width:50%;height:100%;background:linear-gradient(100deg,rgba(255,255,255,0),rgba(255,255,255,.12),rgba(255,255,255,0));transform:skewX(-18deg);pointer-events:none"></div>
             @if (c.isTrial) {<div style="position:absolute;top:14px;right:14px;z-index:2;height:24px;padding:0 9px;border-radius:999px;background:#16C784;color:#04130C;display:flex;align-items:center;gap:5px;font-size:11px;font-weight:800;letter-spacing:.06em;box-shadow:0 6px 16px rgba(22,199,132,.35)"><svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="stroke:#04130C"><path d="M20 12v9H4v-9M2 7h20v5H2zM12 21V7M12 7H7.5a2.5 2.5 0 0 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 0 0 0-5C13 2 12 7 12 7z"></path></svg>FREE TRIAL</div>}
-            <div style="position:absolute;right:4px;bottom:0;width:120px;height:200px;transform:scale(.72);transform-origin:bottom right;display:flex;align-items:flex-end;justify-content:center;pointer-events:none"><span style="display:contents" [innerHTML]="uNode(c.obj)"></span></div>
+            <div style="position:absolute;right:4px;bottom:0;width:120px;height:200px;transform:scale(.72);transform-origin:bottom right;display:flex;align-items:flex-end;justify-content:center;pointer-events:none"><span style="display:contents" [uMorph]="c.obj"></span></div>
             <div style="position:relative;padding:18px;width:210px;height:100%;box-sizing:border-box;display:flex;flex-direction:column;justify-content:space-between">
               <div>
                 <div style="font-size:11px;font-weight:800;letter-spacing:.16em;color:rgba(255,255,255,.75);white-space:nowrap">@if (uShow(c.tier)) {<span class="sc-interp">{{ c.tier }}</span>}</div>
@@ -361,7 +361,7 @@
               <div style="font-size:16px;font-weight:800;font-variant-numeric:tabular-nums;color:{{ c.statusColor }}">@if (uShow(c.statusValue)) {<span class="sc-interp">{{ c.statusValue }}</span>}</div>
             </div>
             <div (click)="c.create($event)" style="height:46px;padding:0 22px;border-radius:999px;display:flex;align-items:center;gap:8px;font-size:15px;font-weight:800;cursor:pointer;flex:none;background:{{ c.ctaBg }};color:{{ c.ctaColor }}">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="stroke:{{ c.ctaColor }}"><path [attr.d]="c.ctaIcon"></path></svg><span style="display:contents" [innerHTML]="uNode(c.cta)"></span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" style="stroke:{{ c.ctaColor }}"><path [attr.d]="c.ctaIcon"></path></svg><span style="display:contents" [uMorph]="c.cta"></span>
             </div>
           </div>
         </div>
@@ -378,7 +378,7 @@
     @for (t of vm.taskHistory; track $index) {
       <div style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06)">
         <div style="width:36px;height:36px;border-radius:11px;background:#18191C;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--acc-l,#A3A9B3)"><path d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg></div>
-        <div style="flex:1;display:flex;flex-direction:column;gap:3px"><div style="font-size:14px;font-weight:700"><span style="display:contents" [innerHTML]="uNode(t.title)"></span></div><div style="font-size:12px;color:rgba(255,255,255,.5)">@if (uShow(t.date)) {<span class="sc-interp">{{ t.date }}</span>}</div></div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:3px"><div style="font-size:14px;font-weight:700"><span style="display:contents" [uMorph]="t.title"></span></div><div style="font-size:12px;color:rgba(255,255,255,.5)">@if (uShow(t.date)) {<span class="sc-interp">{{ t.date }}</span>}</div></div>
         <div style="font-size:14px;font-weight:800;color:#16C784">@if (uShow(t.amt)) {<span class="sc-interp">{{ t.amt }}</span>}</div>
       </div>
     }
@@ -398,7 +398,7 @@
         <div style="font-size:36px;font-weight:800;letter-spacing:-1.4px">$@if (uShow(vm.dispPrice)) {<span class="sc-interp">{{ vm.dispPrice }}</span>}</div>
         <div style="font-size:14px;font-weight:700;color:{{ vm.tfColor }}">@if (uShow(vm.tfChgStr)) {<span class="sc-interp">{{ vm.tfChgStr }}</span>}</div>
       </div>
-      <div style="width:90px;height:90px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [innerHTML]="uNode(vm.detailCoin)"></span></div>
+      <div style="width:90px;height:90px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [uMorph]="vm.detailCoin"></span></div>
     </div>
     <div (pointermove)="vm.onChartMove($event)" (pointerleave)="vm.onChartLeave($event)" style="position:relative;margin-top:18px;height:190px;touch-action:none;cursor:crosshair">
       <svg width="362" height="190" viewBox="0 0 362 190" fill="none" style="position:absolute;inset:0;overflow:visible">
@@ -475,7 +475,7 @@
 @if (vm.isSuccess) {
   <div style="position:relative;min-height:100%;padding:58px 20px 40px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;overflow:hidden">
     <div style="position:absolute;left:50%;top:90px;width:420px;height:420px;margin-left:-210px;border-radius:50%;background:radial-gradient(closest-side, rgba(var(--acc-rgb,107,114,128),.38), rgba(var(--acc-rgb,107,114,128),0));pointer-events:none"></div>
-    <div style="position:relative;margin-top:70px;height:240px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [innerHTML]="uNode(vm.successCoin)"></span></div>
+    <div style="position:relative;margin-top:70px;height:240px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [uMorph]="vm.successCoin"></span></div>
     <div style="position:relative;font-size:30px;font-weight:800;letter-spacing:-1px;margin-top:16px">Order filled</div>
     <div style="position:relative;font-size:15px;font-weight:600;color:rgba(255,255,255,.7);margin-top:8px;text-align:center">@if (uShow(vm.orderLine)) {<span class="sc-interp">{{ vm.orderLine }}</span>}</div>
     <div style="position:relative;align-self:stretch;margin-top:28px;padding:4px 18px;border-radius:20px;background:#111214;border:1px solid rgba(255,255,255,.09)">
@@ -498,7 +498,7 @@
     </div>
     <div style="position:relative;margin-top:16px;padding:22px 20px 20px;border-radius:28px;overflow:hidden;background:radial-gradient(90% 110% at 100% 0%, rgba(76,141,255,.35) 0%, rgba(10,99,241,0) 60%), linear-gradient(150deg,#163F80 0%,#0B2A5E 55%,#071834 100%);border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.18), 0 24px 50px -24px rgba(10,99,241,.6)">
       <div style="position:absolute;inset:0;background-image:radial-gradient(rgba(255,255,255,.08) 1px, transparent 1px);background-size:16px 16px;mask-image:linear-gradient(120deg,transparent 30%,#000 100%);-webkit-mask-image:linear-gradient(120deg,transparent 30%,#000 100%);pointer-events:none"></div>
-      <div style="position:absolute;right:6px;top:10px;width:110px;height:110px;display:flex;align-items:center;justify-content:center;pointer-events:none"><span style="display:contents" [innerHTML]="uNode(vm.teamObj)"></span></div>
+      <div style="position:absolute;right:6px;top:10px;width:110px;height:110px;display:flex;align-items:center;justify-content:center;pointer-events:none"><span style="display:contents" [uMorph]="vm.teamObj"></span></div>
       <div style="position:relative">
         <div style="font-size:12px;font-weight:800;letter-spacing:.14em;color:rgba(255,255,255,.7)">PARTNERS SIZE</div>
         <div style="display:flex;align-items:baseline;gap:8px;margin-top:6px"><div style="font-size:46px;font-weight:800;letter-spacing:-1.8px;line-height:1">@if (uShow(vm.teamSize)) {<span class="sc-interp">{{ vm.teamSize }}</span>}</div><div style="font-size:14px;font-weight:700;color:rgba(255,255,255,.7)">members</div></div>
@@ -662,7 +662,7 @@
     @for (t of vm.billsPreview; track $index) {
       <div style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06)">
         <div style="width:36px;height:36px;border-radius:11px;background:#18191C;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke:{{ t.ic }}"><path [attr.d]="t.d"></path></svg></div>
-        <div style="flex:1;display:flex;flex-direction:column;gap:3px"><div style="font-size:14px;font-weight:700"><span style="display:contents" [innerHTML]="uNode(t.title)"></span></div><div style="font-size:12px;color:rgba(255,255,255,.5)">@if (uShow(t.date)) {<span class="sc-interp">{{ t.date }}</span>} · @if (uShow(t.type)) {<span class="sc-interp">{{ t.type }}</span>}</div></div>
+        <div style="flex:1;display:flex;flex-direction:column;gap:3px"><div style="font-size:14px;font-weight:700"><span style="display:contents" [uMorph]="t.title"></span></div><div style="font-size:12px;color:rgba(255,255,255,.5)">@if (uShow(t.date)) {<span class="sc-interp">{{ t.date }}</span>} · @if (uShow(t.type)) {<span class="sc-interp">{{ t.type }}</span>}</div></div>
         <div style="font-size:14px;font-weight:800;color:{{ t.amtColor }}">@if (uShow(t.amt)) {<span class="sc-interp">{{ t.amt }}</span>}</div>
       </div>
     }
@@ -731,7 +731,7 @@
         <div style="border-radius:20px;background:#111214;border:1px solid {{ q.border }};overflow:hidden">
           <div (click)="q.toggle($event)" style="display:flex;align-items:center;gap:12px;padding:14px 16px;cursor:pointer">
             <div style="width:34px;height:34px;flex:none;border-radius:11px;background:linear-gradient(150deg,#163F80 0%,#0B2A5E 100%);border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800">@if (uShow(q.n)) {<span class="sc-interp">{{ q.n }}</span>}</div>
-            <div style="flex:1;min-width:0;font-size:15px;font-weight:800;line-height:1.3"><span style="display:contents" [innerHTML]="uNode(q.title)"></span></div>
+            <div style="flex:1;min-width:0;font-size:15px;font-weight:800;line-height:1.3"><span style="display:contents" [uMorph]="q.title"></span></div>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="stroke:rgba(255,255,255,.6);flex:none;transition:transform .25s;transform:rotate({{ q.rot }})"><path d="M6 9l6 6 6-6"></path></svg>
           </div>
           @if (q.open) {
@@ -756,10 +756,10 @@
       <div style="font-size:18px;font-weight:800">Points mall</div>
     </div>
     <div style="position:relative;margin-top:18px;border-radius:26px;overflow:hidden;padding:20px;background:radial-gradient(90% 120% at 100% 0%, rgba(76,141,255,.35) 0%, rgba(10,99,241,0) 60%), linear-gradient(150deg,#163F80 0%,#0B2A5E 55%,#071834 100%);border:1px solid rgba(255,255,255,.12);box-shadow:inset 0 1px 0 rgba(255,255,255,.18)">
-      <div style="position:absolute;right:-6px;top:6px;width:120px;height:120px;display:flex;align-items:center;justify-content:center;pointer-events:none"><span style="display:contents" [innerHTML]="uNode(vm.ptsCoin)"></span></div>
+      <div style="position:absolute;right:-6px;top:6px;width:120px;height:120px;display:flex;align-items:center;justify-content:center;pointer-events:none"><span style="display:contents" [uMorph]="vm.ptsCoin"></span></div>
       <div style="position:relative;width:62%">
         <div style="font-size:12px;font-weight:800;letter-spacing:.14em;color:rgba(255,255,255,.7)">TOTAL POINTS EARNED</div>
-        <div style="display:flex;align-items:baseline;gap:6px;margin-top:6px"><div style="font-size:40px;font-weight:800;letter-spacing:-1.4px;line-height:1"><span style="display:contents" [innerHTML]="uNode(vm.ptsTotal)"></span></div><div style="font-size:15px;font-weight:800;color:rgba(255,255,255,.75)">PM</div></div>
+        <div style="display:flex;align-items:baseline;gap:6px;margin-top:6px"><div style="font-size:40px;font-weight:800;letter-spacing:-1.4px;line-height:1"><span style="display:contents" [uMorph]="vm.ptsTotal"></span></div><div style="font-size:15px;font-weight:800;color:rgba(255,255,255,.75)">PM</div></div>
         <div style="display:inline-flex;align-items:center;gap:6px;min-height:28px;padding:5px 10px;border-radius:999px;background:rgba(255,255,255,.14);margin-top:12px;font-size:12px;font-weight:800;white-space:nowrap;box-sizing:border-box"><svg width="13" height="13" viewBox="0 0 24 24" style="fill:#FFD66B"><path d="M12 2l2.9 6.6 7.1.6-5.4 4.7 1.6 7L12 17.3 5.8 20.9l1.6-7L2 9.2l7.1-.6z"></path></svg>@if (uShow(vm.ptsStarLabel)) {<span class="sc-interp">{{ vm.ptsStarLabel }}</span>}</div>
       </div>
       <div style="position:relative;display:flex;gap:6px;margin-top:20px">
@@ -941,7 +941,7 @@
       @for (t of vm.billsList; track $index) {
         <div style="display:flex;align-items:center;gap:12px;padding:13px 0;border-bottom:1px solid rgba(255,255,255,.06)">
           <div style="width:36px;height:36px;border-radius:11px;background:#18191C;display:flex;align-items:center;justify-content:center"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke:{{ t.ic }}"><path [attr.d]="t.d"></path></svg></div>
-          <div style="flex:1;display:flex;flex-direction:column;gap:3px"><div style="font-size:14px;font-weight:700"><span style="display:contents" [innerHTML]="uNode(t.title)"></span></div><div style="font-size:12px;color:rgba(255,255,255,.5)">@if (uShow(t.date)) {<span class="sc-interp">{{ t.date }}</span>} · @if (uShow(t.type)) {<span class="sc-interp">{{ t.type }}</span>}</div></div>
+          <div style="flex:1;display:flex;flex-direction:column;gap:3px"><div style="font-size:14px;font-weight:700"><span style="display:contents" [uMorph]="t.title"></span></div><div style="font-size:12px;color:rgba(255,255,255,.5)">@if (uShow(t.date)) {<span class="sc-interp">{{ t.date }}</span>} · @if (uShow(t.type)) {<span class="sc-interp">{{ t.type }}</span>}</div></div>
           <div style="display:flex;flex-direction:column;align-items:flex-end;gap:3px"><div style="font-size:14px;font-weight:800;color:{{ t.amtColor }}">@if (uShow(t.amt)) {<span class="sc-interp">{{ t.amt }}</span>}</div><div style="font-size:11px;color:rgba(255,255,255,.5);font-weight:600">@if (uShow(t.status)) {<span class="sc-interp">{{ t.status }}</span>}</div></div>
         </div>
       }
@@ -1054,7 +1054,7 @@
     }
     @if (vm.kycDone) {
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center;margin-top:40px">
-        <div style="width:160px;height:160px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [innerHTML]="uNode(vm.kycObj)"></span></div>
+        <div style="width:160px;height:160px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [uMorph]="vm.kycObj"></span></div>
         <div style="font-size:26px;font-weight:800;margin-top:14px">@if (uShow(vm.kycDoneTitle)) {<span class="sc-interp">{{ vm.kycDoneTitle }}</span>}</div>
         <div style="font-size:14px;color:rgba(255,255,255,.65);margin-top:8px;line-height:1.5;max-width:290px">@if (uShow(vm.kycDoneText)) {<span class="sc-interp">{{ vm.kycDoneText }}</span>}</div>
         <div style="align-self:stretch;margin-top:24px;padding:4px 18px;border-radius:20px;background:#111214;border:1px solid rgba(255,255,255,.09);text-align:left">
@@ -1096,7 +1096,7 @@
 
 @if (vm.sheetOpen) {
   <div (click)="vm.closeSheet($event)" style="position:absolute;inset:0;background:rgba(0,0,0,.62);z-index:60;animation:hFade .25s ease"></div>
-  <div style="position:absolute;left:0;right:0;bottom:0;z-index:61;max-height:82%;overflow-y:auto;display:block;background:#111214;border-top:1px solid rgba(255,255,255,.1);border-radius:28px 28px 0 0;padding:10px 20px 34px;box-sizing:border-box;animation:hSheet .35s cubic-bezier(.2,.8,.2,1)">
+  <div class="u-sheet" style="position:absolute;left:0;right:0;bottom:0;z-index:61;max-height:82%;overflow-y:auto;display:block;background:#111214;border-top:1px solid rgba(255,255,255,.1);border-radius:28px 28px 0 0;padding:10px 20px 34px;box-sizing:border-box;animation:hSheet .35s cubic-bezier(.2,.8,.2,1)">
     <div style="position:sticky;top:-10px;z-index:2;margin:-10px -20px 14px;padding:10px 20px 12px;background:#111214;display:flex;flex-direction:column;flex:none">
     <div style="width:40px;height:5px;border-radius:3px;background:rgba(255,255,255,.2);align-self:center;margin-bottom:14px;flex:none"></div>
     <div style="display:flex;align-items:center;justify-content:space-between;flex:none">
@@ -1147,7 +1147,7 @@
     }
     @if (vm.sheetInfo) {
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:6px 0 4px">
-        <div style="width:110px;height:100px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [innerHTML]="uNode(vm.infoObj)"></span></div>
+        <div style="width:110px;height:100px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [uMorph]="vm.infoObj"></span></div>
         <div style="font-size:14px;line-height:1.55;color:rgba(255,255,255,.75);max-width:300px">@if (uShow(vm.infoText)) {<span class="sc-interp">{{ vm.infoText }}</span>}</div>
       </div>
       <div (click)="vm.infoAction($event)" style="margin-top:18px;height:54px;border-radius:999px;background:var(--acc,#6B7280);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;cursor:pointer">@if (uShow(vm.infoCta)) {<span class="sc-interp">{{ vm.infoCta }}</span>}</div>
@@ -1228,18 +1228,18 @@
         <div style="font-size:11px;font-weight:800;letter-spacing:.14em;color:rgba(255,255,255,.5);margin-top:6px">CHAT WITH US</div>
           <div (click)="vm.sup.wa.go($event)" style="display:flex;align-items:center;gap:14px;padding:14px;border-radius:18px;background:#18191C;border:1px solid rgba(255,255,255,.07);cursor:pointer" style-hover="background:#1E1F23">
             <div style="width:46px;height:46px;flex:none;border-radius:14px;display:flex;align-items:center;justify-content:center;background:{{ vm.sup.wa.bg }};box-shadow:inset 0 1px 0 rgba(255,255,255,.25)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke:#fff"><path [attr.d]="vm.sup.wa.icon"></path></svg></div>
-            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="font-size:15px;font-weight:800"><span style="display:contents" [innerHTML]="uNode(vm.sup.wa.title)"></span></div><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.55)"><span style="display:contents" [innerHTML]="uNode(vm.sup.wa.sub)"></span></div></div>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="font-size:15px;font-weight:800"><span style="display:contents" [uMorph]="vm.sup.wa.title"></span></div><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.55)"><span style="display:contents" [uMorph]="vm.sup.wa.sub"></span></div></div>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="stroke:rgba(255,255,255,.45);flex:none"><path d="M7 17L17 7M8 7h9v9"></path></svg>
           </div>
           <div (click)="vm.sup.tg.go($event)" style="display:flex;align-items:center;gap:14px;padding:14px;border-radius:18px;background:#18191C;border:1px solid rgba(255,255,255,.07);cursor:pointer" style-hover="background:#1E1F23">
             <div style="width:46px;height:46px;flex:none;border-radius:14px;display:flex;align-items:center;justify-content:center;background:{{ vm.sup.tg.bg }};box-shadow:inset 0 1px 0 rgba(255,255,255,.25)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke:#fff"><path [attr.d]="vm.sup.tg.icon"></path></svg></div>
-            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="font-size:15px;font-weight:800"><span style="display:contents" [innerHTML]="uNode(vm.sup.tg.title)"></span></div><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.55)"><span style="display:contents" [innerHTML]="uNode(vm.sup.tg.sub)"></span></div></div>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="font-size:15px;font-weight:800"><span style="display:contents" [uMorph]="vm.sup.tg.title"></span></div><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.55)"><span style="display:contents" [uMorph]="vm.sup.tg.sub"></span></div></div>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="stroke:rgba(255,255,255,.45);flex:none"><path d="M7 17L17 7M8 7h9v9"></path></svg>
           </div>
         <div style="font-size:11px;font-weight:800;letter-spacing:.14em;color:rgba(255,255,255,.5);margin-top:10px">STAY UPDATED</div>
           <div (click)="vm.sup.ch.go($event)" style="display:flex;align-items:center;gap:14px;padding:14px;border-radius:18px;background:#18191C;border:1px solid rgba(255,255,255,.07);cursor:pointer" style-hover="background:#1E1F23">
             <div style="width:46px;height:46px;flex:none;border-radius:14px;display:flex;align-items:center;justify-content:center;background:{{ vm.sup.ch.bg }};box-shadow:inset 0 1px 0 rgba(255,255,255,.25)"><svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke:#fff"><path [attr.d]="vm.sup.ch.icon"></path></svg></div>
-            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="font-size:15px;font-weight:800"><span style="display:contents" [innerHTML]="uNode(vm.sup.ch.title)"></span></div><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.55)"><span style="display:contents" [innerHTML]="uNode(vm.sup.ch.sub)"></span></div></div>
+            <div style="flex:1;min-width:0;display:flex;flex-direction:column;gap:3px"><div style="font-size:15px;font-weight:800"><span style="display:contents" [uMorph]="vm.sup.ch.title"></span></div><div style="font-size:12px;font-weight:600;color:rgba(255,255,255,.55)"><span style="display:contents" [uMorph]="vm.sup.ch.sub"></span></div></div>
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="stroke:rgba(255,255,255,.45);flex:none"><path d="M7 17L17 7M8 7h9v9"></path></svg>
           </div>
         <div style="display:flex;gap:10px;margin-top:6px;padding:12px 14px;border-radius:14px;background:rgba(245,165,36,.08);border:1px solid rgba(245,165,36,.25);font-size:12px;line-height:1.5;color:rgba(255,255,255,.75)">
@@ -1308,7 +1308,7 @@
         <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.55)">@if (uShow(vm.srv.name)) {<span class="sc-interp">{{ vm.srv.name }}</span>} · Order amount</div><div style="font-size:16px;font-weight:800;margin-top:2px">@if (uShow(vm.srv.amount)) {<span class="sc-interp">{{ vm.srv.amount }}</span>}</div></div>
         <div style="text-align:right"><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.55)">Est. profit</div><div style="font-size:16px;font-weight:800;margin-top:2px;color:#16C784">@if (uShow(vm.srv.est)) {<span class="sc-interp">{{ vm.srv.est }}</span>}</div></div>
       </div>
-      <div style="overflow-y:auto;flex:1;min-height:0;max-height:430px;margin-top:6px">
+      <div class="u-srv-list" style="overflow-y:auto;flex:1;min-height:0;max-height:430px;margin-top:6px">
         @for (g of vm.serverGroups; track $index) {
           <div style="display:flex;align-items:center;gap:8px;margin:16px 0 8px">
             <div style="font-size:14px;font-weight:800">@if (uShow(g.code)) {<span class="sc-interp">{{ g.code }}</span>}</div>
@@ -1363,7 +1363,7 @@
       <div style="display:flex;width:1360px;height:440px;transform:translateX({{ vm.bnX }});transition:transform .5s cubic-bezier(.4,0,.2,1)">
         <div style="flex:none;position:relative;width:340px;height:440px;overflow:hidden;background:radial-gradient(80% 60% at 70% 30%, #4C8DFF 0%, rgba(10,99,241,0) 70%), linear-gradient(160deg,#0A63F1 0%,#06327A 55%,#050A18 100%)">
           <div style="position:absolute;left:-60px;right:-60px;bottom:120px;height:240px;transform:perspective(380px) rotateX(60deg);transform-origin:bottom;background-image:linear-gradient(rgba(255,255,255,.12) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.12) 1px,transparent 1px);background-size:34px 34px;-webkit-mask-image:linear-gradient(transparent,#000 70%);mask-image:linear-gradient(transparent,#000 70%)"></div>
-          <div style="position:absolute;left:0;right:0;top:40px;height:250px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [innerHTML]="uNode(vm.bnObj1)"></span></div>
+          <div style="position:absolute;left:0;right:0;top:40px;height:250px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [uMorph]="vm.bnObj1"></span></div>
           <div style="position:absolute;left:0;right:0;bottom:0;height:200px;background:linear-gradient(180deg,rgba(5,6,10,0),rgba(5,6,10,.85) 55%)"></div>
           <div style="position:absolute;left:22px;top:22px;height:26px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);display:flex;align-items:center;font-size:11px;font-weight:800;letter-spacing:.08em">AIRDROP EVENT</div>
           <div style="position:absolute;left:22px;right:22px;bottom:24px;display:flex;flex-direction:column;gap:6px">
@@ -1374,7 +1374,7 @@
         </div>
         <div style="flex:none;position:relative;width:340px;height:440px;overflow:hidden;background:radial-gradient(70% 55% at 50% 35%, rgba(76,141,255,.55) 0%, rgba(10,99,241,0) 70%), linear-gradient(180deg,#0B1324 0%,#05070D 100%)">
           <div style="position:absolute;left:50%;top:165px;width:300px;height:300px;margin:-150px 0 0 -150px;border-radius:50%;border:1px solid rgba(255,255,255,.12)"></div><div style="position:absolute;left:50%;top:165px;width:220px;height:220px;margin:-110px 0 0 -110px;border-radius:50%;border:1px dashed rgba(76,141,255,.45)"></div>
-          <div style="position:absolute;left:0;right:0;top:40px;height:250px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [innerHTML]="uNode(vm.bnObj2)"></span></div>
+          <div style="position:absolute;left:0;right:0;top:40px;height:250px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [uMorph]="vm.bnObj2"></span></div>
           <div style="position:absolute;left:0;right:0;bottom:0;height:200px;background:linear-gradient(180deg,rgba(5,6,10,0),rgba(5,6,10,.85) 55%)"></div>
           <div style="position:absolute;left:22px;top:22px;height:26px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);display:flex;align-items:center;font-size:11px;font-weight:800;letter-spacing:.08em">NEW · BI Ace</div>
           <div style="position:absolute;left:22px;right:22px;bottom:24px;display:flex;flex-direction:column;gap:6px">
@@ -1385,7 +1385,7 @@
         </div>
         <div style="flex:none;position:relative;width:340px;height:440px;overflow:hidden;background:radial-gradient(90% 60% at 20% 20%, rgba(76,141,255,.6) 0%, rgba(10,99,241,0) 65%), radial-gradient(70% 50% at 90% 70%, rgba(10,99,241,.5) 0%, rgba(10,99,241,0) 70%), linear-gradient(150deg,#071A3D 0%,#050608 100%)">
           <div style="position:absolute;inset:0;background:repeating-linear-gradient(115deg,rgba(255,255,255,.04) 0 2px,transparent 2px 12px)"></div>
-          <div style="position:absolute;left:0;right:0;top:40px;height:250px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [innerHTML]="uNode(vm.bnObj3)"></span></div>
+          <div style="position:absolute;left:0;right:0;top:40px;height:250px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [uMorph]="vm.bnObj3"></span></div>
           <div style="position:absolute;left:0;right:0;bottom:0;height:200px;background:linear-gradient(180deg,rgba(5,6,10,0),rgba(5,6,10,.85) 55%)"></div>
           <div style="position:absolute;left:22px;top:22px;height:26px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);display:flex;align-items:center;font-size:11px;font-weight:800;letter-spacing:.08em">REFERRAL</div>
           <div style="position:absolute;left:22px;right:22px;bottom:24px;display:flex;flex-direction:column;gap:6px">
@@ -1396,7 +1396,7 @@
         </div>
         <div style="flex:none;position:relative;width:340px;height:440px;overflow:hidden;background:conic-gradient(from 200deg at 50% 38%, #0A63F1, #050A18 30%, #0A2F70 55%, #4C8DFF 75%, #0A63F1)">
           <div style="position:absolute;inset:0;background:radial-gradient(60% 45% at 50% 38%, rgba(5,6,10,0) 0%, rgba(5,6,10,.7) 100%)"></div>
-          <div style="position:absolute;left:0;right:0;top:40px;height:250px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [innerHTML]="uNode(vm.bnObj4)"></span></div>
+          <div style="position:absolute;left:0;right:0;top:40px;height:250px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [uMorph]="vm.bnObj4"></span></div>
           <div style="position:absolute;left:0;right:0;bottom:0;height:200px;background:linear-gradient(180deg,rgba(5,6,10,0),rgba(5,6,10,.85) 55%)"></div>
           <div style="position:absolute;left:22px;top:22px;height:26px;padding:0 10px;border-radius:999px;background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.22);backdrop-filter:blur(8px);display:flex;align-items:center;font-size:11px;font-weight:800;letter-spacing:.08em">DAILY STRATEGY</div>
           <div style="position:absolute;left:22px;right:22px;bottom:24px;display:flex;flex-direction:column;gap:6px">
@@ -1429,7 +1429,7 @@
 @if (vm.maintOn) {
   <div style="position:absolute;inset:0;z-index:300;background:radial-gradient(90% 60% at 50% 30%, rgba(10,99,241,.35) 0%, rgba(10,99,241,0) 70%), #050506;display:flex;flex-direction:column;align-items:center;padding:96px 24px 40px;box-sizing:border-box;text-align:center;animation:hFade .4s ease">
     <div style="display:flex;align-items:center;gap:8px"><div style="width:30px;height:30px;box-shadow:inset 0 0 0 1px rgba(141,182,255,.6),inset 0 1px 0 rgba(255,255,255,.35);border-radius:6px;background:linear-gradient(150deg,#4C8DFF 0%,#0A63F1 55%,#0640A8 100%);display:flex;align-items:center;justify-content:center;padding-bottom:0.6px;box-sizing:border-box;font-family:'Inter',sans-serif;font-weight:900;font-size:15px;line-height:1;letter-spacing:-0.3px;color:#fff;text-shadow:0.9px 1.8px 1.23px rgba(5,12,34,.72)">Bi</div><div style="font-size:20px;font-weight:800">B-Infinity</div></div>
-    <div style="height:240px;display:flex;align-items:center;justify-content:center;margin-top:18px"><span style="display:contents" [innerHTML]="uNode(vm.maintObj)"></span></div>
+    <div style="height:240px;display:flex;align-items:center;justify-content:center;margin-top:18px"><span style="display:contents" [uMorph]="vm.maintObj"></span></div>
     <div style="height:28px;padding:0 12px;border-radius:999px;background:rgba(245,165,36,.15);color:#F5A524;display:flex;align-items:center;gap:6px;font-size:12px;font-weight:800"><div style="width:7px;height:7px;border-radius:50%;background:#F5A524"></div>Scheduled maintenance</div>
     <div style="font-size:28px;font-weight:800;letter-spacing:-.8px;margin-top:14px;line-height:1.15">We're upgrading B-Infinity</div>
     <div style="font-size:14px;line-height:1.55;color:rgba(255,255,255,.65);margin-top:10px;max-width:300px">Orders and deposits are paused while we improve our servers. Your assets are safe and nothing is lost.</div>
@@ -1447,7 +1447,7 @@
   <div (click)="vm.closeRefer($event)" style="position:absolute;inset:0;background:rgba(0,0,0,.78);z-index:120;animation:hFade .3s ease"></div>
   <div style="position:absolute;left:50%;top:50%;width:350px;z-index:121;transform:translate(-50%,-50%);border-radius:28px;overflow:hidden;background:#111214;border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 80px rgba(0,0,0,.7);animation:hPop .4s cubic-bezier(.2,.8,.2,1)">
     <div style="position:relative;height:210px;background:radial-gradient(70% 80% at 50% 30%, rgba(10,99,241,.45) 0%, rgba(10,99,241,0) 70%), linear-gradient(180deg,#0B1324 0%,#111214 100%)">
-      <span style="display:contents" [innerHTML]="uNode(vm.referObj)"></span>
+      <span style="display:contents" [uMorph]="vm.referObj"></span>
       <div (click)="vm.closeRefer($event)" style="position:absolute;top:12px;right:12px;width:34px;height:34px;border-radius:50%;background:rgba(10,10,10,.6);border:1px solid rgba(255,255,255,.16);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke-width="2.6" stroke-linecap="round" style="stroke:#fff"><path d="M6 6l12 12M18 6L6 18"></path></svg></div>
     </div>
     <div style="padding:4px 20px 20px;display:flex;flex-direction:column;align-items:center;text-align:center">
@@ -1498,7 +1498,7 @@
   </div>
 }
 
-@if (vm.fxOn) {<span style="display:contents" [innerHTML]="uNode(vm.fxEl)"></span>}
+@if (vm.fxOn) {<span style="display:contents" [uMorph]="vm.fxEl"></span>}
 
 @if (vm.taskDone) {
   <div style="position:absolute;left:16px;right:16px;bottom:22px;z-index:151;background:#111214;border:1px solid rgba(255,255,255,.12);border-radius:28px;box-shadow:0 30px 60px rgba(0,0,0,.7), 0 0 0 1px rgba(10,99,241,.15);padding:16px 16px 16px;box-sizing:border-box;animation:hCardUp .9s cubic-bezier(.2,.85,.2,1) both">
@@ -1534,9 +1534,9 @@
         </div>
       </div>
       <div style="height:28px;padding:0 12px;border-radius:999px;margin-top:22px;display:flex;align-items:center;font-size:12px;font-weight:800;background:{{ vm.tx.pillBg }};color:{{ vm.tx.color }}">@if (uShow(vm.tx.pill)) {<span class="sc-interp">{{ vm.tx.pill }}</span>}</div>
-      <div style="font-size:26px;font-weight:800;letter-spacing:-.6px;margin-top:12px;text-align:center"><span style="display:contents" [innerHTML]="uNode(vm.tx.title)"></span></div>
+      <div style="font-size:26px;font-weight:800;letter-spacing:-.6px;margin-top:12px;text-align:center"><span style="display:contents" [uMorph]="vm.tx.title"></span></div>
       <div style="font-size:38px;font-weight:800;letter-spacing:-1.4px;margin-top:6px;font-variant-numeric:tabular-nums">@if (uShow(vm.tx.amount)) {<span class="sc-interp">{{ vm.tx.amount }}</span>}</div>
-      <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.6);margin-top:6px;text-align:center;line-height:1.5;max-width:300px;text-wrap:pretty"><span style="display:contents" [innerHTML]="uNode(vm.tx.sub)"></span></div>
+      <div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.6);margin-top:6px;text-align:center;line-height:1.5;max-width:300px;text-wrap:pretty"><span style="display:contents" [uMorph]="vm.tx.sub"></span></div>
       
       <div style="align-self:stretch;margin-top:12px;padding:4px 18px;border-radius:22px;background:#111214;border:1px solid rgba(255,255,255,.09)">
         @for (r of vm.tx.rows; track $index) {
@@ -1555,7 +1555,7 @@
   <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:90;max-width:300px;padding:14px 20px;border-radius:16px;background:rgba(30,31,35,.96);border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 50px rgba(0,0,0,.6);font-size:14px;font-weight:700;text-align:center;line-height:1.4;animation:hFade .2s ease;pointer-events:none">@if (uShow(vm.toastText)) {<span class="sc-interp">{{ vm.toastText }}</span>}</div>
 }
 
-<span style="display:contents" [innerHTML]="uNode(vm.splash)"></span>
+<span style="display:contents" [uMorph]="vm.splash"></span>
     </div>
   </div>
 </div>
