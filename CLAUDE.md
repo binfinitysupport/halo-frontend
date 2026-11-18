@@ -36,7 +36,7 @@ node tools/convert.js $T src/app/user
 If the prototype's fonts or data scripts change, also copy the woff2 files listed in `$T/fonts.txt` into
 `src/assets/fonts/` and the two `<script src>` files of the prototype into `src/user-data/`.
 The converter mirrors the dc-runtime: `sc-if/sc-for` → `@if/@for`, `{{ x }}` → `<span class="sc-interp">`,
-element values → `[uMorph]`, server sheet → flex column on short screens, `onChange` on text inputs → `(input)`, and it resets `box-sizing` to `content-box`
+element values → `[uMorph]`, server sheet → flex column on short screens, order-result coin/card fitted on short screens (`placeResultCoin()` + `.u-res-fit`), `onChange` on text inputs → `(input)`, and it resets `box-sizing` to `content-box`
 inside the user app (the admin's global reset uses border-box).
 
 ## Status

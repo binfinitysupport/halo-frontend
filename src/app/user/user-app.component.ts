@@ -68,6 +68,34 @@ export class UserAppComponent extends UserAppLogic implements AfterViewInit, Aft
       const cbs = this.pendingCallbacks.splice(0);
       for (const cb of cbs) cb();
     }
+    this.placeResultCoin();
+  }
+
+  // Order result: the coin rests at y=128 (scale .72) above the card, which fits the 874px design.
+  // On shorter phones the card reaches that spot, so centre the coin in the space left above the card.
+  resCoinY: number | undefined;
+  resCoinScale: number | undefined;
+  private placeResultCoin(): void {
+    let y: number | undefined, scale: number | undefined;
+    const card = this.state.task?.phase === 'done' ? this.host.nativeElement.querySelector<HTMLElement>('.u-res-card') : null;
+    if (card && card.offsetParent) {
+      // Cap the card (scrolling content, pinned buttons) only when it can't fit with room for the coin.
+      const limit = (card.offsetParent as HTMLElement).clientHeight - 22 - 92;
+      const need = card.classList.contains('u-res-fit') ? card.scrollHeight - 16 : card.offsetHeight;
+      card.classList.toggle('u-res-fit', need > limit);
+    }
+    if (card && card.offsetTop < 198) {
+      const space = card.offsetTop;
+      scale = Math.round(Math.max(0.4, Math.min(0.72, (space - 24) / 150)) * 100) / 100;
+      y = Math.round(Math.max(space / 2, (150 * scale) / 2 + 8));
+    }
+    if (y === this.resCoinY && scale === this.resCoinScale) return;
+    // Deferred: changing the view model while Angular is checking the view is not allowed.
+    setTimeout(() => {
+      this.resCoinY = y;
+      this.resCoinScale = scale;
+      this.forceUpdate();
+    });
   }
 
   ngOnDestroy(): void {

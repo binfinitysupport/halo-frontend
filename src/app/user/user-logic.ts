@@ -77,7 +77,7 @@ export class UserAppLogic {
   }
   fxEl() {
     const e = h, t = this.state.fxTick || 0, p = this.state.task.pending || {}, done = this.state.task.phase === 'done';
-    const cx = 201, cy = 400, coinY = done ? 128 : cy;
+    const cx = 201, cy = 400, coinY = done ? (this.resCoinY ?? 128) : cy;
     const caption = t < 1700 ? 'Connecting to ' + p.server : t < 3200 ? 'Executing strategy' : 'Booking profit';
     return e('div', {style:{position:'absolute', inset:0, zIndex:150, background:'#050506', overflow:'hidden', animation:'hFade .4s ease'}},
       e('div', {style:{position:'absolute', left:cx - 9, top:0, width:18, height:cy, transformOrigin:'top center', borderRadius:'0 0 9px 9px',
@@ -87,7 +87,7 @@ export class UserAppLogic {
         background:'radial-gradient(closest-side, #F2F7FF 0%, #8DB6FF 28%, rgba(76,141,255,.75) 52%, rgba(10,99,241,.35) 76%, rgba(10,99,241,0) 100%)', boxShadow:'0 0 70px rgba(10,99,241,.55)',
         animation:'hOpen 1.8s cubic-bezier(.3,0,.2,1) 1.5s both'}}),
       e('div', {style:{position:'absolute', left:cx, top:coinY, width:420, height:420, transform:'translate(-50%,-50%)', borderRadius:'50%', background:'radial-gradient(closest-side, rgba(10,99,241,.55), rgba(0,0,0,0))', opacity: t > 2200 ? 1 : 0, transition:'opacity 1.2s ease, top .9s cubic-bezier(.2,.85,.2,1)'}}),
-      e('div', {style:{position:'absolute', left:cx - 75, top:coinY - 75, width:150, height:150, transform: done ? 'scale(.72)' : 'scale(1)', transition:'top .9s cubic-bezier(.2,.85,.2,1), transform .9s cubic-bezier(.2,.85,.2,1)'}}, e('div', {style:{width:150, height:150, animation:'hCoinIn 1.2s cubic-bezier(.2,.8,.2,1) 2.3s both'}}, this.coin3d(150, 'Ξ', done ? 4 : 1.8, 'blue', true))),
+      e('div', {style:{position:'absolute', left:cx - 75, top:coinY - 75, width:150, height:150, transform: done ? 'scale(' + (this.resCoinScale ?? .72) + ')' : 'scale(1)', transition:'top .9s cubic-bezier(.2,.85,.2,1), transform .9s cubic-bezier(.2,.85,.2,1)'}}, e('div', {style:{width:150, height:150, animation:'hCoinIn 1.2s cubic-bezier(.2,.8,.2,1) 2.3s both'}}, this.coin3d(150, 'Ξ', done ? 4 : 1.8, 'blue', true))),
       e('div', {style:{position:'absolute', left:0, right:0, bottom:90, textAlign:'center', fontSize:15, fontWeight:700, color:'rgba(255,255,255,.75)', opacity: done ? 0 : 1, transition:'opacity .4s ease'}}, caption));
   }
   giftObj() {

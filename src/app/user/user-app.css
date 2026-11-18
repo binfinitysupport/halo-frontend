@@ -101,3 +101,7 @@
 /* Server sheet: lay out as a column so the server list shrinks and scrolls and "Order now" stays visible.
    (The prototype marks the list flex:1 and the rest flex:none, but its sheet is display:block.) */
 .u-screen .u-sheet:has(> .u-srv-list) { display: flex !important; flex-direction: column; overflow: hidden !important; }
+/* Order result card on very short phones (the component adds .u-res-fit only when the card doesn't fit):
+   leave room above it for the coin, scroll its content, and keep "View bills / Done" pinned to its bottom. */
+.u-screen .u-res-card.u-res-fit { max-height: calc(100% - 22px - 92px); overflow-y: auto; }
+.u-screen .u-res-fit .u-res-actions { position: sticky; bottom: -16px; align-self: stretch; margin-top: 0 !important; margin-bottom: -16px; padding: 12px 0 16px; background: #111214; }
