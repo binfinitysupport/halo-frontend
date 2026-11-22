@@ -216,10 +216,7 @@
     <div style="margin:0 -20px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent);mask-image:linear-gradient(90deg,transparent,#000 12%,#000 88%,transparent)"><span style="display:contents" [uMorph]="vm.partnersMarquee"></span></div>
 
     <div style="font-size:19px;font-weight:800;margin:28px 0 14px">How B-Infinity works</div>
-    <div (click)="vm.playVideo($event)" style="position:relative;height:204px;border-radius:24px;background:repeating-linear-gradient(135deg,#111214 0 10px,#16171A 10px 20px);border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;justify-content:center;cursor:pointer;overflow:hidden">
-      <div style="width:64px;height:64px;border-radius:50%;background:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 10px 30px rgba(0,0,0,.5)"><svg width="22" height="22" viewBox="0 0 24 24"><path d="M8 5v14l11-7z" fill="#0A0A0A"></path></svg></div>
-      <div style="position:absolute;left:16px;bottom:14px;font:600 11px ui-monospace,Menlo,monospace;color:rgba(255,255,255,.55)">project explainer video</div>
-    </div>
+    <div style="position:relative;height:204px;border-radius:24px;border:1px solid rgba(255,255,255,.09);overflow:hidden;background:#000"><video src="/assets/videos/how-b-infinity-works.mp4" controls playsinline preload="metadata" style="width:100%;height:100%;object-fit:contain;display:block"></video></div>
   </div>
 }
 

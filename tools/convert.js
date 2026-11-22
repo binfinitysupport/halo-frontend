@@ -149,6 +149,24 @@ if (scopes.length) throw new Error('unbalanced sc blocks');
 
 html = html.replace(/height:874px;/g, 'min-height:100%;');
 
+// Replaces the converted template text from `startText` through `endText` (inclusive). Both must match once, in order.
+function patchHtmlRange(startText, endText, to) {
+  if (html.split(startText).length !== 2) throw new Error('expected one template match for: ' + startText);
+  const start = html.indexOf(startText);
+  const endAt = html.indexOf(endText, start);
+  if (endAt < 0) throw new Error('end not found for: ' + startText);
+  html = html.slice(0, start) + to + html.slice(endAt + endText.length);
+}
+// "How B-Infinity works": the placeholder box becomes the explainer video (served from src/assets/videos).
+// preload="metadata" so the video file is only downloaded when someone presses play.
+patchHtmlRange(
+  '<div (click)="vm.playVideo($event)" style="position:relative;height:204px;',
+  'project explainer video</div>\n    </div>',
+  '<div style="position:relative;height:204px;border-radius:24px;border:1px solid rgba(255,255,255,.09);overflow:hidden;background:#000">' +
+  '<video src="/assets/videos/how-b-infinity-works.mp4" controls playsinline preload="metadata" ' +
+  'style="width:100%;height:100%;object-fit:contain;display:block"></video></div>'
+);
+
 // Phones are shorter than the 874px design: hooks so the server sheet can keep its button on screen (see CSS).
 function tagOnce(re, cls) {
   const n = (html.match(re) || []).length;
