@@ -1,16 +1,49 @@
-const fs=require('fs'),zlib=require('zlib'),path=require('path');
-const [,,src,outDir]=process.argv;
-fs.mkdirSync(outDir,{recursive:true});
-const html=fs.readFileSync(src,'utf8');
-function tag(t){const m=html.match(new RegExp('<script type="__bundler/'+t+'"[^>]*>([\\s\\S]*?)</script>'));return m?m[1]:null}
-const manifest=JSON.parse(tag('manifest'));let template=JSON.parse(tag('template'));
-const ext=tag('ext_resources');console.log('ext',ext&&ext.slice(0,300));
-const list=[];
-for(const [u,e] of Object.entries(manifest)){
-  let b=Buffer.from(e.data,'base64'); if(e.compressed) b=zlib.gunzipSync(b);
-  const extn=(e.mime||'').split('/')[1]?.replace(/[^a-z0-9]/gi,'').slice(0,6)||'bin';
-  const f=u+'.'+extn; fs.writeFileSync(path.join(outDir,f),b); list.push([u,e.mime,b.length]);
-  template=template.split(u).join(f);
+// STEP 1 of 3 – unpack the prototype.
+//
+// The prototype (prototypes/b-infinity-prototype.html) is a single "bundled" HTML file: every image, font and
+// script is stored inside it as base64 text (sometimes gzipped), and the page itself is stored as a template that
+// refers to those assets by id. This script writes each asset out as a normal file and saves the page as index.html.
+//
+// Usage:  node tools/unpack.js prototypes/b-infinity-prototype.html <outputFolder>
+// Next:   node tools/split.js <outputFolder>
+const fs = require('fs');
+const zlib = require('zlib');
+const path = require('path');
+
+const [, , bundlePath, outputDir] = process.argv;
+fs.mkdirSync(outputDir, { recursive: true });
+const bundleHtml = fs.readFileSync(bundlePath, 'utf8');
+
+// The bundle keeps its data in <script type="__bundler/NAME"> tags; returns the text inside one of them.
+function readBundlerScript(name) {
+  const scriptPattern = new RegExp('<script type="__bundler/' + name + '"[^>]*>([\\s\\S]*?)</script>');
+  const match = bundleHtml.match(scriptPattern);
+  return match ? match[1] : null;
 }
-fs.writeFileSync(path.join(outDir,'index.html'),template);
-console.log(list.map(x=>x.join(' ')).join('\n')); console.log('template',template.length);
+
+const manifest = JSON.parse(readBundlerScript('manifest')); // { assetId: { data, compressed, mime } }
+let pageHtml = JSON.parse(readBundlerScript('template'));    // the page, with asset ids where file URLs go
+const externalResources = readBundlerScript('ext_resources');
+console.log('ext', externalResources && externalResources.slice(0, 300));
+
+const MAX_EXTENSION_LENGTH = 6;
+
+// Write every asset to disk and point the page at the new file name.
+const writtenAssets = [];
+for (const [assetId, asset] of Object.entries(manifest)) {
+  let bytes = Buffer.from(asset.data, 'base64');
+  if (asset.compressed) bytes = zlib.gunzipSync(bytes);
+
+  // "font/woff2" -> "woff2", "application/javascript" -> "javasc"
+  const mimeSubtype = (asset.mime || '').split('/')[1];
+  const extension = mimeSubtype?.replace(/[^a-z0-9]/gi, '').slice(0, MAX_EXTENSION_LENGTH) || 'bin';
+  const fileName = assetId + '.' + extension;
+
+  fs.writeFileSync(path.join(outputDir, fileName), bytes);
+  writtenAssets.push([assetId, asset.mime, bytes.length]);
+  pageHtml = pageHtml.split(assetId).join(fileName);
+}
+
+fs.writeFileSync(path.join(outputDir, 'index.html'), pageHtml);
+console.log(writtenAssets.map((row) => row.join(' ')).join('\n'));
+console.log('template', pageHtml.length);

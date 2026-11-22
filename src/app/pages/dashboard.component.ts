@@ -1,3 +1,5 @@
+// Admin "Dashboard" page: six summary cards (users, balances, deposits, pending withdrawals, fee revenue).
+// The numbers come from GET /api/dashboard/kpis; the card texts and colours are built in `cards` below.
 import { LoaderComponent } from '../components/loader.component';
 import { Component, computed, inject, signal } from '@angular/core';
 import { ApiService, errorMessage } from '../core/api.service';
@@ -9,17 +11,22 @@ import { fmt } from '../core/format';
   standalone: true,
   imports: [LoaderComponent],
   template: `
-    @if (error(); as e) {
-      <div class="empty">{{ e }}</div>
+    <!-- Error from the API, if loading failed -->
+    @if (error(); as errorText) {
+      <div class="empty">{{ errorText }}</div>
     }
+    <!-- Spinner while the numbers are loading -->
     @if (!kpis() && !error()) { <app-loader /> }
+    <!-- The summary cards -->
     @if (cards().length) {
       <div class="kpi-grid">
-        @for (c of cards(); track c.label) {
+        @for (card of cards(); track card.label) {
           <div class="kpi">
-            <div class="kpi-label">{{ c.label }}</div>
-            <div class="kpi-value">{{ c.value }}</div>
-            <div class="kpi-delta" [style.color]="c.color">{{ c.delta }}</div>
+            <div class="kpi-label">{{ card.label }}</div>
+            <div class="kpi-value">{{ card.value }}</div>
+            @if (card.delta) {
+              <div class="kpi-delta" [style.color]="card.color">{{ card.delta }}</div>
+            }
           </div>
         }
       </div>
@@ -28,27 +35,32 @@ import { fmt } from '../core/format';
 })
 export class DashboardComponent {
   private api = inject(ApiService);
-  kpis = signal<Kpis | null>(null);
+  kpis = signal<Kpis | null>(null); // null until the API answers
   error = signal<string | null>(null);
 
+  // One entry per card: label, big value, small line under it, and that line's colour.
+  // Recalculated automatically when `kpis` is set.
   cards = computed(() => {
-    const d = this.kpis();
-    if (!d) return [];
-    const GREEN = '#16C784', AMBER = '#F5A524', MUTED = 'rgba(255,255,255,.55)';
+    const kpis = this.kpis();
+    if (!kpis) return [];
+    const GREEN = '#16C784';
+    const AMBER = '#F5A524';
+    const MUTED = 'rgba(255,255,255,.55)';
     return [
-      { label: 'Total users', value: String(d.totalUsers), delta: '+184 this week', color: GREEN },
-      { label: 'Active today', value: fmt(d.activeToday, 0), delta: '+6.2% vs yesterday', color: GREEN },
-      { label: 'User balances', value: `${fmt(d.userBalances, 0)} USDT`, delta: 'Across all wallets', color: MUTED },
-      { label: 'Deposits credited', value: `${fmt(d.depositsCredited, 0)} USDT`, delta: 'Auto-credited via gateway', color: MUTED },
-      { label: 'Pending withdrawals', value: String(d.pendingWithdrawals.count), delta: `${fmt(d.pendingWithdrawals.amount, 0)} USDT waiting`, color: AMBER },
-      { label: 'Platform fee revenue', value: `${fmt(d.feeRevenue)} USDT`, delta: `${d.feePercent}% of task income`, color: GREEN },
+      { label: 'Total users', value: String(kpis.totalUsers), delta: '', color: GREEN },
+      { label: 'Active today', value: fmt(kpis.activeToday, 0), delta: '', color: GREEN },
+      { label: 'User balances', value: `${fmt(kpis.userBalances, 0)} USDT`, delta: 'Across all wallets', color: MUTED },
+      { label: 'Deposits credited', value: `${fmt(kpis.depositsCredited, 0)} USDT`, delta: 'Auto-credited via gateway', color: MUTED },
+      { label: 'Pending withdrawals', value: String(kpis.pendingWithdrawals.count), delta: `${fmt(kpis.pendingWithdrawals.amount, 0)} USDT waiting`, color: AMBER },
+      { label: 'Platform fee revenue', value: `${fmt(kpis.feeRevenue)} USDT`, delta: `${kpis.feePercent}% of task income`, color: GREEN },
     ];
   });
 
+  // Loads the numbers once, when the page opens.
   constructor() {
     this.api.get<Kpis>('/dashboard/kpis').subscribe({
-      next: (d) => this.kpis.set(d),
-      error: (e) => this.error.set(errorMessage(e)),
+      next: (kpis) => this.kpis.set(kpis),
+      error: (error) => this.error.set(errorMessage(error)),
     });
   }
 }

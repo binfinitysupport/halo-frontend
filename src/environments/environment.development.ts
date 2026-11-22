@@ -1,4 +1,6 @@
-// `npm run dev`: /api is proxied to the local backend on port 5050 (proxy.conf.json).
+// Settings for local development (`npm run dev`).
+// "/api" requests go to the Angular dev server, which forwards them to the backend on
+// http://localhost:5050 (see proxy.conf.json).
 export const environment = {
   production: false,
   apiUrl: '/api',

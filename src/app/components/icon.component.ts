@@ -1,6 +1,8 @@
+// <app-icon name="users" /> draws one of the line icons below as an SVG.
+// To add an icon, add its SVG path data (24×24 viewBox) to ICON under a new name.
 import { Component, computed, input } from '@angular/core';
 
-// Same icon paths as the prototype.
+// SVG path data for each icon name (same paths as the admin prototype).
 export const ICON: Record<string, string> = {
   dash: 'M4 13h6V4H4zM14 20h6V11h-6zM4 20h6v-3H4zM14 7h6V4h-6z',
   users: 'M9 11a4 4 0 1 0 0-8 4 4 0 0 0 0 8zM2 21a7 7 0 0 1 14 0M17 3.5a4 4 0 0 1 0 7.5M22 21a7 7 0 0 0-4-6.3',
@@ -16,6 +18,7 @@ export const ICON: Record<string, string> = {
   shield: 'M12 3l8 4v5c0 5-3.5 8-8 9-4.5-1-8-4-8-9V7zM9 12l2 2 4-4',
   copy: 'M9 9h11v11H9zM5 15H4V4h11v1',
   reload: 'M21 12a9 9 0 1 1-2.6-6.4M21 4v5h-5',
+  logout: 'M15 3h4a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2h-4M10 17l5-5-5-5M15 12H3',
 };
 
 @Component({
@@ -29,9 +32,9 @@ export const ICON: Record<string, string> = {
     </svg>`,
 })
 export class IconComponent {
-  name = input.required<string>();
-  size = input(18);
-  stroke = input('#fff');
-  width = input(1.9);
-  path = computed(() => ICON[this.name()] ?? '');
+  name = input.required<string>(); // a key of ICON
+  size = input(18); // width and height in px
+  stroke = input('#fff'); // line colour
+  width = input(1.9); // line thickness
+  path = computed(() => ICON[this.name()] ?? ''); // unknown names draw nothing
 }

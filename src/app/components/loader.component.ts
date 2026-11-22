@@ -1,3 +1,6 @@
+// Loading indicators for the admin.
+// - <app-loader>: a spinner card shown where a page's content will appear, while its first load runs.
+// - <app-progress-bar>: a thin bar at the top of the screen while any API request runs (see core/loading.ts).
 import { Component, inject, input } from '@angular/core';
 import { LoadingService } from '../core/loading';
 
@@ -13,8 +16,8 @@ import { LoadingService } from '../core/loading';
   `,
 })
 export class LoaderComponent {
-  label = input('Loading…');
-  compact = input(false);
+  label = input('Loading…'); // text under the spinner
+  compact = input(false); // smaller version without the card background (used in the user drawer)
 }
 
 // Thin animated bar at the very top of the admin while any request is in flight.

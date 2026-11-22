@@ -1,7 +1,13 @@
+<!--
+  GENERATED FILE – do not edit by hand.
+  Made by tools/convert.js from prototypes/b-infinity-prototype.html (the prototype's screens).
+  To change it, change the converter or the prototype and regenerate (see client/README.md).
+-->
 <div class="u-root" data-ref="rootRef">
   <div class="u-screen" data-ref="screenRef">
     <div style="width:100%;height:100%;position:relative;background:#0A0A0A;overflow:hidden;font-family:'Manrope',system-ui,sans-serif;color:#fff;font-variant-numeric:tabular-nums">
       <div data-ref="scrollRef" style="position:absolute;inset:0;overflow-y:auto;overflow-x:hidden">
+<!-- SCREEN: Sign in / sign up (start screen) -->
 @if (vm.isAuth) {
   <div style="padding:60px 20px 40px">
     <div style="display:flex;align-items:center;gap:10px;height:44px">
@@ -10,6 +16,7 @@
       <div (click)="vm.openLang($event)" style="width:40px;height:40px;display:flex;align-items:center;justify-content:center;cursor:pointer"><div style="width:24px;height:24px;border-radius:50%;object-fit:cover;box-shadow:0 0 0 1.5px rgba(255,255,255,.5);flex:none;background:#1B1C1F url({{ vm.langFlagUrl }}) center/cover no-repeat"></div></div>
     </div>
 
+    <!-- SCREEN: Register form -->
     @if (vm.isRegister) {
       <div style="margin-top:22px;display:flex;flex-direction:column;gap:6px">
         <div style="font-size:30px;font-weight:800;letter-spacing:-1px">Create account</div>
@@ -45,7 +52,7 @@
           </div>
         </div>
         <div style="display:flex;flex-direction:column;gap:8px">
-          <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600"><span style="color:rgba(255,255,255,.65)">Invitation code</span><span style="color:var(--acc-l,#A3A9B3)">Auto-filled from invite link</span></div>
+          <div style="display:flex;justify-content:space-between;font-size:13px;font-weight:600"><span style="color:rgba(255,255,255,.65)">Invitation code</span>@if (vm.invite) {<span style="color:var(--acc-l,#A3A9B3)">Auto-filled from invite link</span>}</div>
           <div style="height:52px;border-radius:14px;background:rgba(var(--acc-rgb,107,114,128),.1);border:1px solid rgba(var(--acc-rgb,107,114,128),.45);display:flex;align-items:center;padding:0 14px;gap:10px">
             <div style="flex:1;font-size:16px;font-weight:800;letter-spacing:.12em">@if (uShow(vm.invite)) {<span class="sc-interp">{{ vm.invite }}</span>}</div>
             <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="stroke:var(--acc-l,#A3A9B3)"><path d="M6 11h12v10H6zM8 11V7a4 4 0 0 1 8 0v4"></path></svg>
@@ -68,11 +75,12 @@
           <div style="width:20px;height:20px;flex:none;border-radius:6px;background:{{ vm.agreeBg }};border:1.5px solid {{ vm.agreeBorder }};display:flex;align-items:center;justify-content:center">@if (vm.reg.agree) {<svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="3.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"></path></svg>}</div>
           <span>I have read and agree to <span style="color:var(--acc-l,#A3A9B3);font-weight:700">Privacy Policy</span></span>
         </div>
-        <div (click)="vm.submitRegister($event)" style="height:56px;border-radius:999px;background:var(--acc,#6B7280);display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;cursor:pointer;margin-top:4px" style-hover="background:var(--acc-h,#7C838E)">Submit</div>
+        <div (click)="vm.submitRegister($event)" style="height:56px;border-radius:999px;background:{{ vm.submitBg }};color:{{ vm.submitColor }};display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;cursor:{{ vm.submitCursor }};margin-top:4px" style-hover="background:var(--acc-h,#7C838E)">Submit</div>
         <div style="text-align:center;font-size:14px;color:rgba(255,255,255,.65)">Already have an account? <span (click)="vm.goLoginMode($event)" style="color:var(--acc-l,#A3A9B3);font-weight:800;cursor:pointer">Login now</span></div>
       </div>
     }
 
+    <!-- SCREEN: Login form -->
     @if (vm.isLogin) {
       <div style="margin-top:28px;display:flex;flex-direction:column;gap:6px">
         <div style="font-size:34px;font-weight:800;letter-spacing:-1.2px">Hello</div>
@@ -122,6 +130,7 @@
     }
   </div>
 }
+<!-- SCREEN: Home tab -->
 @if (vm.isHome) {
   <div style="padding:60px 20px 130px">
     <div style="display:flex;align-items:center;gap:4px;height:44px">
@@ -220,6 +229,7 @@
   </div>
 }
 
+<!-- SCREEN: Subscription (plans) screen -->
 @if (vm.isPlans) {
   <div style="position:relative;padding:60px 0 130px">
     <div style="position:absolute;left:50%;top:90px;width:520px;height:320px;margin-left:-260px;border-radius:50%;background:radial-gradient(closest-side, rgba(10,99,241,.28), rgba(10,99,241,0));pointer-events:none"></div>
@@ -310,6 +320,7 @@
   </div>
 }
 
+<!-- SCREEN: Strategy (markets) tab -->
 @if (vm.isMarkets) {
   <div style="padding:60px 20px 130px">
     <div style="display:flex;align-items:flex-end;justify-content:space-between;gap:12px">
@@ -382,6 +393,7 @@
   </div>
 }
 
+<!-- SCREEN: Coin detail screen -->
 @if (vm.isDetail) {
   <div style="padding:58px 20px 130px">
     <div style="display:flex;align-items:center;justify-content:space-between;height:48px">
@@ -426,6 +438,7 @@
   </div>
 }
 
+<!-- SCREEN: Trade (buy / sell) screen -->
 @if (vm.isTrade) {
   <div style="min-height:100%;padding:58px 20px 38px;box-sizing:border-box;display:flex;flex-direction:column">
     <div style="display:flex;align-items:center;justify-content:space-between;height:48px">
@@ -469,6 +482,7 @@
   </div>
 }
 
+<!-- SCREEN: Order result screen -->
 @if (vm.isSuccess) {
   <div style="position:relative;min-height:100%;padding:58px 20px 40px;box-sizing:border-box;display:flex;flex-direction:column;align-items:center;overflow:hidden">
     <div style="position:absolute;left:50%;top:90px;width:420px;height:420px;margin-left:-210px;border-radius:50%;background:radial-gradient(closest-side, rgba(var(--acc-rgb,107,114,128),.38), rgba(var(--acc-rgb,107,114,128),0));pointer-events:none"></div>
@@ -487,6 +501,7 @@
     </div>
   </div>
 }
+<!-- SCREEN: Team screen -->
 @if (vm.isTeam) {
   <div style="padding:60px 20px 130px">
     <div style="display:flex;align-items:center;justify-content:space-between;height:44px">
@@ -586,6 +601,7 @@
     </div>
   </div>
 }
+<!-- SCREEN: Assets tab (wallet) -->
 @if (vm.isAssets) {
   <div style="padding:60px 20px 130px">
     <div style="font-size:30px;font-weight:800;letter-spacing:-1px;height:44px;display:flex;align-items:center">Assets</div>
@@ -666,6 +682,7 @@
   </div>
 }
 
+<!-- SCREEN: Bills (billing history) screen -->
 @if (vm.isBills) {
   <div style="padding:58px 20px 60px">
     <div style="display:flex;align-items:center;gap:12px;height:48px">
@@ -716,6 +733,7 @@
     </div>
   </div>
 }
+<!-- SCREEN: Help center screen -->
 @if (vm.isHelp) {
   <div style="padding:58px 20px 60px">
     <div style="display:flex;align-items:center;gap:12px;height:48px">
@@ -746,6 +764,7 @@
     </div>
   </div>
 }
+<!-- SCREEN: Points mall screen -->
 @if (vm.isPoints) {
   <div style="padding:58px 20px 60px">
     <div style="display:flex;align-items:center;gap:12px;height:48px">
@@ -835,6 +854,7 @@
     </div>
   </div>
 }
+<!-- SCREEN: Agency alliance screen -->
 @if (vm.isAgency) {
   <div style="padding:58px 20px 60px">
     <div style="display:flex;align-items:center;gap:12px;height:48px">
@@ -889,6 +909,7 @@
     <div style="margin-top:14px;padding:14px;border-radius:16px;background:#111214;border:1px solid rgba(255,255,255,.08);font-size:13px;line-height:1.55;color:rgba(255,255,255,.75)"><span style="color:#8DB6FF;font-weight:800">Important clarification:</span> The total commission rate of 19% represents the sum of the six different level-based rates. It does not mean that you receive 19% of every member's profits. Each member's eligible profits are subject to the commission rate assigned to their respective referral level.</div>
   </div>
 }
+<!-- SCREEN: About us screen -->
 @if (vm.isAbout) {
   <div style="padding:58px 20px 60px">
     <div style="display:flex;align-items:center;gap:12px;height:48px">
@@ -925,6 +946,7 @@
     <p style="margin:10px 0 0;font-size:14px;line-height:1.6;color:rgba(255,255,255,.72);text-wrap:pretty">Through these principles, we aspire to contribute to a more accessible and informed digital financial ecosystem.</p>
   </div>
 }
+<!-- SCREEN: Transaction history screen -->
 @if (vm.isTxHistory) {
   <div style="padding:58px 20px 60px">
     <div style="display:flex;align-items:center;gap:12px;height:48px">
@@ -945,6 +967,7 @@
     </div>
   </div>
 }
+<!-- SCREEN: Profile tab -->
 @if (vm.isProfile) {
   <div style="padding:58px 20px 130px">
     <div style="display:flex;align-items:center;gap:12px;height:48px">
@@ -994,6 +1017,7 @@
   </div>
 }
 
+<!-- SCREEN: KYC (identity check) screen -->
 @if (vm.isKyc) {
   <div style="padding:58px 20px 60px">
     <div style="display:flex;align-items:center;gap:12px;height:48px">
@@ -1063,6 +1087,7 @@
   </div>
 }
       </div>
+<!-- SCREEN: Coin detail: bottom buy / sell bar -->
 @if (vm.isDetail) {
   <div style="position:absolute;left:0;right:0;bottom:0;padding:24px 20px 38px;background:linear-gradient(180deg,rgba(10,10,10,0),#0A0A0A 40%);display:flex;gap:10px">
     <div (click)="vm.detailSell($event)" style="flex:1;height:56px;border-radius:999px;background:#fff;color:#0A0A0A;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;cursor:pointer">Sell</div>
@@ -1101,6 +1126,7 @@
       <div (click)="vm.closeSheet($event)" style="width:34px;height:34px;border-radius:50%;background:#1B1C1F;display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.6" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"></path></svg></div>
     </div>
     </div>
+    <!-- SCREEN: Sheet: country picker -->
     @if (vm.sheetCountry) {
       <div style="height:46px;border-radius:14px;background:#18191C;border:1px solid rgba(255,255,255,.09);display:flex;align-items:center;gap:10px;padding:0 14px;flex:none">
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,.55)" stroke-width="2" stroke-linecap="round"><path d="M11 18a7 7 0 1 0 0-14 7 7 0 0 0 0 14zM20 20l-4-4"></path></svg>
@@ -1116,6 +1142,7 @@
         }
       </div>
     }
+    <!-- SCREEN: Sheet: language picker -->
     @if (vm.sheetLang) {
       <div style="overflow-y:auto;flex:1;min-height:0;max-height:540px">
         @for (l of vm.langList; track $index) {
@@ -1127,6 +1154,7 @@
         }
       </div>
     }
+    <!-- SCREEN: Sheet: chat with support -->
     @if (vm.sheetChat) {
       <div style="display:flex;align-items:center;gap:10px;padding-bottom:12px;border-bottom:1px solid rgba(255,255,255,.07)">
         <div style="width:36px;height:36px;box-shadow:inset 0 0 0 1px rgba(141,182,255,.6),inset 0 1px 0 rgba(255,255,255,.35);border-radius:50%;background:linear-gradient(150deg,#4C8DFF 0%,#0A63F1 55%,#0640A8 100%);display:flex;align-items:center;justify-content:center;padding-bottom:0.72px;box-sizing:border-box;font-family:'Inter',sans-serif;font-weight:900;font-size:15.84px;line-height:1;letter-spacing:-0.36px;color:#fff;text-shadow:1.08px 2.16px 1.48px rgba(5,12,34,.72)">Bi</div>
@@ -1142,6 +1170,7 @@
         <div (click)="vm.sendChat($event)" style="width:48px;height:48px;border-radius:50%;background:var(--acc,#6B7280);display:flex;align-items:center;justify-content:center;cursor:pointer"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#fff" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 2L11 13M22 2l-7 20-4-9-9-4z"></path></svg></div>
       </div>
     }
+    <!-- SCREEN: Sheet: information message -->
     @if (vm.sheetInfo) {
       <div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:10px;padding:6px 0 4px">
         <div style="width:110px;height:100px;display:flex;align-items:center;justify-content:center"><span style="display:contents" [uMorph]="vm.infoObj"></span></div>
@@ -1149,6 +1178,7 @@
       </div>
       <div (click)="vm.infoAction($event)" style="margin-top:18px;height:54px;border-radius:999px;background:var(--acc,#6B7280);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;cursor:pointer">@if (uShow(vm.infoCta)) {<span class="sc-interp">{{ vm.infoCta }}</span>}</div>
     }
+    <!-- SCREEN: Sheet: change login password -->
     @if (vm.sheetPassword) {
       <div style="display:flex;flex-direction:column;gap:12px">
         @for (f of vm.pwdFields; track $index) {
@@ -1160,6 +1190,7 @@
         <div (click)="vm.savePassword($event)" style="margin-top:6px;height:54px;border-radius:999px;background:var(--acc,#6B7280);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;cursor:pointer">Update password</div>
       </div>
     }
+    <!-- SCREEN: Sheet: transfer -->
     @if (vm.sheetTransfer) {
       <div style="display:flex;padding:4px;border-radius:999px;background:#18191C;border:1px solid rgba(255,255,255,.09)">
         @for (t of vm.transferTabs; track $index) {<div (click)="t.pick($event)" style="flex:1;height:38px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:800;cursor:pointer;background:{{ t.bg }};color:{{ t.color }}">@if (uShow(t.label)) {<span class="sc-interp">{{ t.label }}</span>}</div>}
@@ -1187,6 +1218,7 @@
         <div (click)="vm.submitTransfer($event)" style="margin-top:4px;height:54px;border-radius:999px;background:var(--acc,#6B7280);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;cursor:pointer">Confirm transfer</div>
       </div>
     }
+    <!-- SCREEN: Sheet: deposit -->
     @if (vm.sheetDeposit) {
       <div style="font-size:13px;font-weight:700;color:rgba(255,255,255,.6);margin-bottom:10px">Select wallet</div>
       <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">
@@ -1219,6 +1251,7 @@
       </div>
       <div (click)="vm.depContinue($event)" style="margin-top:16px;height:54px;border-radius:999px;display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;cursor:pointer;background:{{ vm.depBtnBg }};color:{{ vm.depBtnColor }}">Continue</div>
     }
+    <!-- SCREEN: Sheet: support -->
     @if (vm.sheetSupport) {
       <div style="display:flex;flex-direction:column;gap:10px">
         <div style="display:flex;align-items:center;gap:8px;font-size:12px;font-weight:700;color:#16C784"><div style="width:7px;height:7px;border-radius:50%;background:#16C784;box-shadow:0 0 8px #16C784"></div>Support team online 24/7</div>
@@ -1245,6 +1278,7 @@
         </div>
       </div>
     }
+    <!-- SCREEN: Sheet: salary -->
     @if (vm.sheetSalary) {
       <div style="display:flex;flex-direction:column;gap:8px">
         <div style="display:flex;gap:12px;padding:14px;border-radius:16px;background:#18191C;border:1px solid rgba(255,255,255,.07)">
@@ -1300,6 +1334,7 @@
       </div>
       <div (click)="vm.closeSheet($event)" style="margin-top:14px;height:52px;border-radius:999px;background:#0B2A5E;color:#fff;border:1px solid rgba(255,255,255,.1);display:flex;align-items:center;justify-content:center;font-size:15px;font-weight:800;cursor:pointer;flex:none">Got it</div>
     }
+    <!-- SCREEN: Sheet: choose a server (strategy order) -->
     @if (vm.sheetServers) {
       <div style="display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:16px;background:#18191C;flex:none">
         <div style="flex:1;min-width:0"><div style="font-size:11px;font-weight:600;color:rgba(255,255,255,.55)">@if (uShow(vm.srv.name)) {<span class="sc-interp">{{ vm.srv.name }}</span>} · Order amount</div><div style="font-size:16px;font-weight:800;margin-top:2px">@if (uShow(vm.srv.amount)) {<span class="sc-interp">{{ vm.srv.amount }}</span>}</div></div>
@@ -1329,6 +1364,7 @@
         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" style="stroke:{{ vm.orderColor }}"><path d="M13 2L4 14h7l-1 8 9-12h-7z"></path></svg>@if (uShow(vm.orderLabel)) {<span class="sc-interp">{{ vm.orderLabel }}</span>}
       </div>
     }
+    <!-- SCREEN: Sheet: withdraw -->
     @if (vm.sheetWithdraw) {
       <div style="display:flex;flex-direction:column;gap:12px">
         <div style="display:flex;flex-direction:column;gap:6px"><div style="font-size:13px;font-weight:600;color:rgba(255,255,255,.65)">Wallet address ·&nbsp; USDT, USDC via BEP20&nbsp; &amp; TRC20&nbsp;</div><div style="height:50px;border-radius:14px;background:#18191C;border:1px solid rgba(255,255,255,.09);display:flex;align-items:center"><input [value]="vm.wd.addr" (input)="vm.onWdAddr($event); uSync()" placeholder="Paste address" style="flex:1;min-width:0;height:100%;padding:0 14px;background:none;border:none;outline:none;color:#fff;font:600 15px 'Manrope',sans-serif"></div></div>
@@ -1353,6 +1389,7 @@
   </div>
 }
 
+<!-- SCREEN: Airdrop popup (over the home screen) -->
 @if (vm.popupOpen) {
   <div (click)="vm.closePopup($event)" style="position:absolute;inset:0;background:rgba(0,0,0,.78);z-index:70;animation:hFade .3s ease"></div>
   <div style="position:absolute;left:50%;top:50%;width:340px;z-index:71;transform:translate(-50%,-50%);display:flex;flex-direction:column;gap:16px;animation:hPop .4s cubic-bezier(.2,.8,.2,1)">
@@ -1423,6 +1460,7 @@
   </div>
 }
 
+<!-- SCREEN: Maintenance page (covers the app) -->
 @if (vm.maintOn) {
   <div style="position:absolute;inset:0;z-index:300;background:radial-gradient(90% 60% at 50% 30%, rgba(10,99,241,.35) 0%, rgba(10,99,241,0) 70%), #050506;display:flex;flex-direction:column;align-items:center;padding:96px 24px 40px;box-sizing:border-box;text-align:center;animation:hFade .4s ease">
     <div style="display:flex;align-items:center;gap:8px"><div style="width:30px;height:30px;box-shadow:inset 0 0 0 1px rgba(141,182,255,.6),inset 0 1px 0 rgba(255,255,255,.35);border-radius:6px;background:linear-gradient(150deg,#4C8DFF 0%,#0A63F1 55%,#0640A8 100%);display:flex;align-items:center;justify-content:center;padding-bottom:0.6px;box-sizing:border-box;font-family:'Inter',sans-serif;font-weight:900;font-size:15px;line-height:1;letter-spacing:-0.3px;color:#fff;text-shadow:0.9px 1.8px 1.23px rgba(5,12,34,.72)">Bi</div><div style="font-size:20px;font-weight:800">B-Infinity</div></div>
@@ -1440,6 +1478,7 @@
   </div>
 }
 
+<!-- SCREEN: Refer-a-friend overlay -->
 @if (vm.referOn) {
   <div (click)="vm.closeRefer($event)" style="position:absolute;inset:0;background:rgba(0,0,0,.78);z-index:120;animation:hFade .3s ease"></div>
   <div style="position:absolute;left:50%;top:50%;width:350px;z-index:121;transform:translate(-50%,-50%);border-radius:28px;overflow:hidden;background:#111214;border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 80px rgba(0,0,0,.7);animation:hPop .4s cubic-bezier(.2,.8,.2,1)">
@@ -1466,6 +1505,7 @@
   </div>
 }
 
+<!-- SCREEN: Deposit QR overlay -->
 @if (vm.depQrOn) {
   <div (click)="vm.depCloseQr($event)" style="position:absolute;inset:0;background:rgba(0,0,0,.78);z-index:120;animation:hFade .3s ease"></div>
   <div style="position:absolute;left:50%;top:50%;width:350px;z-index:121;transform:translate(-50%,-50%);border-radius:28px;background:#111214;border:1px solid rgba(255,255,255,.12);box-shadow:0 30px 80px rgba(0,0,0,.7);padding:20px;box-sizing:border-box;animation:hPop .4s cubic-bezier(.2,.8,.2,1)">
@@ -1495,6 +1535,7 @@
   </div>
 }
 
+<!-- SCREEN: Order animation overlay -->
 @if (vm.fxOn) {<span style="display:contents" [uMorph]="vm.fxEl"></span>}
 
 @if (vm.taskDone) {
@@ -1519,6 +1560,7 @@
   </div>
 }
 
+<!-- SCREEN: Transaction result overlay -->
 @if (vm.txOn) {
   <div style="position:absolute;inset:0;z-index:140;background:#0A0A0A;overflow-y:auto;animation:hFade .35s ease">
     <div style="position:absolute;left:50%;top:30px;width:420px;height:420px;margin-left:-210px;border-radius:50%;background:radial-gradient(closest-side, {{ vm.tx.glow }}, rgba(0,0,0,0));pointer-events:none"></div>
@@ -1548,6 +1590,7 @@
   </div>
 }
 
+<!-- SCREEN: Toast message -->
 @if (vm.toastOn) {
   <div style="position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:90;max-width:300px;padding:14px 20px;border-radius:16px;background:rgba(30,31,35,.96);border:1px solid rgba(255,255,255,.12);box-shadow:0 20px 50px rgba(0,0,0,.6);font-size:14px;font-weight:700;text-align:center;line-height:1.4;animation:hFade .2s ease;pointer-events:none">@if (uShow(vm.toastText)) {<span class="sc-interp">{{ vm.toastText }}</span>}</div>
 }

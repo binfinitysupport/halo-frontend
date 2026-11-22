@@ -1,59 +1,67 @@
 import { Directive, ElementRef, Input, OnChanges, inject } from '@angular/core';
 import { Html, escapeHtml } from './user-h';
 
-// Renders a slot that holds an element built by h() (coins, charts, the order animation) or plain text.
-// Instead of replacing innerHTML, it patches the existing DOM in place (like React's reconciliation),
-// so running CSS animations and transitions are not restarted when the element is re-rendered.
+// The [uMorph] directive: shows a view-model value that is an element built by h() (a coin, a chart, the order
+// animation) or plain text. The generated template uses it like:  <span [uMorph]="vm.heroObj"></span>
+//
+// Why not just set innerHTML? Replacing innerHTML throws away the old elements and creates new ones, so any CSS
+// animation inside restarts from the beginning (the order animation used to stutter because of this).
+// Instead this directive compares the new HTML with what is already on the page and changes only what differs
+// (like React does), so running animations and transitions continue smoothly.
 @Directive({ selector: '[uMorph]', standalone: true })
 export class UMorphDirective implements OnChanges {
   @Input() uMorph: unknown;
   private readonly host = inject<ElementRef<HTMLElement>>(ElementRef).nativeElement;
-  private last: string | null = null;
+  private lastRenderedHtml: string | null = null;
 
+  // Runs whenever the bound value changes.
   ngOnChanges(): void {
     const html = toHtml(this.uMorph);
-    if (html === this.last) return;
-    this.last = html;
-    const tpl = document.createElement('template');
-    tpl.innerHTML = html;
-    patchChildren(this.host, tpl.content);
+    if (html === this.lastRenderedHtml) return;
+    this.lastRenderedHtml = html;
+    const parsedTemplate = document.createElement('template');
+    parsedTemplate.innerHTML = html;
+    patchChildren(this.host, parsedTemplate.content);
   }
 }
 
 // Same rules as the prototype runtime: null/undefined/booleans render nothing, text goes in <span class="sc-interp">.
-export function toHtml(v: unknown): string {
-  if (v instanceof Html) return v.html;
-  if (Array.isArray(v)) return v.map(toHtml).join('');
-  if (v === null || v === undefined || typeof v === 'boolean') return '';
-  return '<span class="sc-interp">' + escapeHtml(v) + '</span>';
+export function toHtml(value: unknown): string {
+  if (value instanceof Html) return value.html;
+  if (Array.isArray(value)) return value.map(toHtml).join('');
+  if (value === null || value === undefined || typeof value === 'boolean') return '';
+  return '<span class="sc-interp">' + escapeHtml(value) + '</span>';
 }
 
-function patchChildren(target: Node, source: Node): void {
-  const current = Array.from(target.childNodes);
-  const next = Array.from(source.childNodes);
-  next.forEach((n, i) => {
-    const c = current[i];
-    if (!c) target.appendChild(n);
-    else patchNode(target, c, n);
+// Makes the children of `target` match the children of `desired`, reusing existing nodes by position.
+function patchChildren(target: Node, desired: Node): void {
+  const currentChildren = Array.from(target.childNodes);
+  const desiredChildren = Array.from(desired.childNodes);
+  desiredChildren.forEach((desiredChild, index) => {
+    const currentChild = currentChildren[index];
+    if (!currentChild) target.appendChild(desiredChild);
+    else patchNode(target, currentChild, desiredChild);
   });
-  for (let i = next.length; i < current.length; i++) target.removeChild(current[i]);
+  for (let index = desiredChildren.length; index < currentChildren.length; index++) target.removeChild(currentChildren[index]);
 }
 
-function patchNode(parent: Node, c: Node, n: Node): void {
-  if (c.nodeType !== n.nodeType || c.nodeName !== n.nodeName) {
-    parent.replaceChild(n, c);
+// Makes one existing node match the desired one: replace it if it's a different kind of node,
+// otherwise update its text or attributes and then its children.
+function patchNode(parent: Node, currentNode: Node, desiredNode: Node): void {
+  if (currentNode.nodeType !== desiredNode.nodeType || currentNode.nodeName !== desiredNode.nodeName) {
+    parent.replaceChild(desiredNode, currentNode);
     return;
   }
-  if (c.nodeType !== Node.ELEMENT_NODE) {
-    if (c.nodeValue !== n.nodeValue) c.nodeValue = n.nodeValue;
+  if (currentNode.nodeType !== Node.ELEMENT_NODE) {
+    if (currentNode.nodeValue !== desiredNode.nodeValue) currentNode.nodeValue = desiredNode.nodeValue;
     return;
   }
-  const ce = c as Element, ne = n as Element;
-  for (const a of Array.from(ne.attributes)) {
-    if (ce.getAttribute(a.name) !== a.value) ce.setAttribute(a.name, a.value);
+  const currentElement = currentNode as Element, desiredElement = desiredNode as Element;
+  for (const attribute of Array.from(desiredElement.attributes)) {
+    if (currentElement.getAttribute(attribute.name) !== attribute.value) currentElement.setAttribute(attribute.name, attribute.value);
   }
-  for (const a of Array.from(ce.attributes)) {
-    if (!ne.hasAttribute(a.name)) ce.removeAttribute(a.name);
+  for (const attribute of Array.from(currentElement.attributes)) {
+    if (!desiredElement.hasAttribute(attribute.name)) currentElement.removeAttribute(attribute.name);
   }
-  patchChildren(ce, ne);
+  patchChildren(currentElement, desiredElement);
 }

@@ -1,3 +1,6 @@
+// On/off switch: <app-toggle [on]="isLive" (changed)="toggle()" />.
+// It does not change itself: clicking only emits `changed`; the parent saves the new value and passes
+// the updated `on` back in. That keeps the switch in sync with what is really saved.
 import { Component, input, output } from '@angular/core';
 import { NgStyle } from '@angular/common';
 
@@ -14,7 +17,7 @@ import { NgStyle } from '@angular/common';
 })
 export class ToggleComponent {
   on = input(false);
-  large = input(false);
-  onColor = input('#0A63F1');
+  large = input(false); // bigger size, used for maintenance mode
+  onColor = input('#0A63F1'); // background colour when on
   changed = output<void>();
 }

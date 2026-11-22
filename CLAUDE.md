@@ -18,7 +18,10 @@
 - Deployed on Vercel via `vercel.json` (no env vars). If the Render URL changes, update `src/environments/environment.ts`.
 
 ## Layout
-- `src/app/app.routes.ts` – `''` → user app, `'admin'` → admin.
+- `src/app/app.routes.ts` – `''` → user app (`?mode=login` opens the login form), `'admin'` → admin, guarded by `adminAuthGuard`.
+- Admin auth (`src/app/core/admin-auth.*`): the user-app login form hands an email login that matches no app account
+  to `UserAppComponent.tryAdminLogin()`, which calls `POST /api/auth/login`; on success the token is stored and the
+  browser goes to `/admin`. `adminAuthInterceptor` sends the token and logs out on 401. Log out is in the admin sidebar.
 - `src/app/user/` – **generated** by `tools/convert.js`; do not hand-edit `user-app.html`, `user-logic.ts`, `user-app.css`.
   - `user-h.ts` – `h()` replaces React.createElement; returns `Html` values.
   - `user-morph.directive.ts` – `[uMorph]` renders `Html` slots by patching the DOM in place (like React), so CSS animations are not restarted on re-render. Never switch these slots back to `[innerHTML]`.

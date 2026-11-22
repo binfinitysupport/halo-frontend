@@ -1,6 +1,13 @@
+// The admin menu: one entry per page, in the order shown in the sidebar.
+// "badge" names a count from UiStore.meta() that is shown next to the item (e.g. pending KYC requests).
 import { PageId } from './models';
 
-export interface NavItem { id: PageId; label: string; icon: string; badge?: 'kycPending' | 'withdrawalsPending' }
+export interface NavItem {
+  id: PageId;
+  label: string;
+  icon: string; // a key of ICON in components/icon.component.ts
+  badge?: 'kycPending' | 'withdrawalsPending';
+}
 
 export const NAV: NavItem[] = [
   { id: 'dashboard', label: 'Dashboard', icon: 'dash' },
